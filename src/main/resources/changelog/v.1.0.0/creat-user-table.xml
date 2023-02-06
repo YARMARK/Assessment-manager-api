@@ -15,6 +15,9 @@
       <column name="last_name" type="VARCHAR">
         <constraints unique="false"/>
       </column>
+      <column name="folder_url" type="VARCHAR">
+        <constraints unique="false"/>
+      </column>
       <column name="date_of_incoming" type="DATE"  >
         <constraints unique="false"/>
       </column>
