@@ -17,6 +17,10 @@ public class GoogleService {
 
   private GoogleDriveManager manager;
 
+  private String FOLDER_PATH =
+      "C:\\Users\\yaraslau.markau\\IdeaProjects\\googleTest\\src\\main\\resources"
+          + "\\templates";
+
   @Autowired
   public GoogleService(GoogleDriveManager manager) {
     this.manager = manager;
@@ -34,9 +38,7 @@ public class GoogleService {
   }
 
   private List<String> uploadDoc(String folderId) throws GeneralSecurityException, IOException {
-    String folderPath = "C:\\Users\\yaraslau.markau\\IdeaProjects\\googleTest\\src\\main\\resources"
-        + "\\templates";
-    List<java.io.File> fileList = getListOfFiles(folderPath);
+    List<java.io.File> fileList = getListOfFiles(FOLDER_PATH);
     var fileMetadata = new File();
     fileMetadata.setMimeType("application/vnd.google-apps.spreadsheet");
     fileMetadata.setParents(Collections.singletonList(folderId));
@@ -60,19 +62,19 @@ public class GoogleService {
     java.io.File[] listOfFiles = folder.listFiles();
     String regex = "[A-Za-z\\d]{1,50}.xlsx";
     List<java.io.File> returnList = new ArrayList<>();
-    for (java.io.File file : listOfFiles) {
-      if (file.isFile() && file.getName().matches(regex)) {
-        returnList.add(file);
+      for (java.io.File file : listOfFiles) {
+        if (file.isFile() && file.getName().matches(regex)) {
+          returnList.add(file);
+        }
       }
-    }
-    return returnList;
+      return returnList;
   }
 
   public String createFolderAndUploadFile(String folderName)
       throws GeneralSecurityException, IOException {
     String folderId = createFolderByName(folderName);
     List<String> fileIdList = uploadDoc(folderId);
-    if (Objects.nonNull(folderId) &&  !fileIdList.isEmpty()) {
+    if (Objects.nonNull(folderId) && !fileIdList.isEmpty()) {
       return folderId;
     }
     throw new SomethingWentWrongException("UNABLE TO CREAT FOLDER OR UPLOAD FILE");

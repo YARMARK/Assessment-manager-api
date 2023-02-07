@@ -36,7 +36,7 @@ public class GoogleController {
   @PostMapping("/creatFolder")
   public ResponseEntity<String> createFolderByFirstNameAndLastName(
       @Valid @RequestBody UserInfoCreationDto infoDto) throws Exception {
-    String folderByName = facade.createFolderAndSaveUser(infoDto);
+    String folderByName = facade.processUserInfo(infoDto);
     return ResponseEntity.ok().body(folderByName);
   }
 

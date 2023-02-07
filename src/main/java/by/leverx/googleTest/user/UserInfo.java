@@ -40,20 +40,18 @@ public class UserInfo implements Serializable {
   private String folder_url;
 
   @Column (name = "date_of_incoming")
-  @JsonSerialize(using = LocalDateSerializer.class)
-  @JsonDeserialize(using = LocalDateDeserializer.class)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+//  @JsonSerialize(using = LocalDateSerializer.class)
+//  @JsonDeserialize(using = LocalDateDeserializer.class)
+//  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   private LocalDate dateOfIncoming;
 
   @Column(name = "last_assessment")
-  @JsonSerialize(using = LocalDateSerializer.class)
-  @JsonDeserialize(using = LocalDateDeserializer.class)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+//  @JsonSerialize(using = LocalDateSerializer.class)
+//  @JsonDeserialize(using = LocalDateDeserializer.class)
   private LocalDate lastAssessmentDate;
 
   @Column(name = "next_assessment")
-  @JsonSerialize(using = LocalDateSerializer.class)
-  @JsonDeserialize(using = LocalDateDeserializer.class)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+//  @JsonSerialize(using = LocalDateSerializer.class)
+//  @JsonDeserialize(using = LocalDateDeserializer.class)
   private LocalDate nextAssessmentDate;
 }

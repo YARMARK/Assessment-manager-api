@@ -6,7 +6,7 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
   <changeSet id="creat_user_table" author="Yar">
     <createTable tableName="user_info">
-      <column name="userId" type="BIGINT" defaultValueComputed="nextval('user_seq')">
+      <column name="user_id" type="BIGINT" defaultValueComputed="nextval('user_seq')">
         <constraints primaryKey="true" unique="true"/>
       </column>
       <column name="first_name" type="VARCHAR">

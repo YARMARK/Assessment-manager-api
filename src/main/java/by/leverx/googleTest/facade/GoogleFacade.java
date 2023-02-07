@@ -36,7 +36,7 @@ public class GoogleFacade {
     this.userService = userService;
   }
 
-  public String createFolderAndSaveUser(UserInfoCreationDto dto) throws Exception {
+  public String processUserInfo(UserInfoCreationDto dto) throws Exception {
     String folderName = dto.getFirstName() + "_" + dto.getLastName();
     String folderId = createFolderByFolderName(folderName);
     UserInfoDto savedUser = saveUserInfo(dto, folderId);
