@@ -3,6 +3,7 @@ package by.leverx.googleTest.exception.handler;
 import by.leverx.googleTest.exception.SomethingWentWrongException;
 import by.leverx.googleTest.exception.SuchFolderAlreadyExist;
 import by.leverx.googleTest.exception.SuchUserAlreadyExist;
+import by.leverx.googleTest.exception.UserNotFoundException;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -58,6 +59,13 @@ public class GlobalExceptionHandler {
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public @ResponseBody ErrorResponse handleSuchUserAlreadyExist(FileNotFoundException ex) {
     return new ErrorResponse(HttpStatus.NOT_FOUND.value(),
-        "The system cannot find the path specified");
+        "THE SYSTEM CAN NOT FIND THE PATH SPECIFIED");
+  }
+
+  @ExceptionHandler(UserNotFoundException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public @ResponseBody ErrorResponse handleUserNotFound(UserNotFoundException ex) {
+    return new ErrorResponse(HttpStatus.NOT_FOUND.value(),
+        ex.getMessage());
   }
 }
