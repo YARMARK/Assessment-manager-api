@@ -27,4 +27,17 @@ public class DbConfiguration {
 
     return dataSource;
   }
+
+  @Bean
+  public DataSource getTestDataSource() {
+    var dataSource = new DriverManagerDataSource();
+
+    dataSource.setUrl("jdbc:postgresql://" + credentials.getHostName() + ":" + credentials.getPort() +
+        "/" + credentials.getDbName());
+    dataSource.setUsername(credentials.getUserName());
+    dataSource.setPassword(credentials.getPassword());
+    dataSource.setDriverClassName(credentials.getDriverClassName());
+
+    return dataSource;
+  }
 }
