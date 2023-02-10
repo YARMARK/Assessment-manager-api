@@ -1,0 +1,19 @@
+version: '3.6'
+services:
+  software:
+    restart: unless-stopped
+    image: atlassian/jira-software:latest
+    container_name: jira
+    ports:
+      - '8080:8080'
+    volumes:
+      - /jiraVolume:/var/atlassian/application-data/jira
+
+  google-test:
+    restart: unless-stopped
+    build: .
+    container_name: google_test
+    command: [ "java","-jar","/app.jar" ]
+    ports:
+      - '8085:8085'
+    working_dir: /usr/src/app

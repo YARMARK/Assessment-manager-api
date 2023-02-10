@@ -30,6 +30,7 @@
     <liquibase-mvn-plugin.version>4.17.0</liquibase-mvn-plugin.version>
     <log4j2-logger.version>2.6.5</log4j2-logger.version>
     <modelmapper.version>2.4.4</modelmapper.version>
+    <psql.version>42.5.0</psql.version>
   </properties>
   <dependencies>
     <dependency>
@@ -100,6 +101,11 @@
       <groupId>org.modelmapper</groupId>
       <artifactId>modelmapper</artifactId>
       <version>${modelmapper.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${psql.version}</version>
     </dependency>
   </dependencies>
 
