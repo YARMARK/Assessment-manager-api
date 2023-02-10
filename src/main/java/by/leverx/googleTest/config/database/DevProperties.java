@@ -1,4 +1,4 @@
-package by.leverx.googleTest.config.dbConfig;
+package by.leverx.googleTest.config.database;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Profile("dev")
 @Component
 @Data
-public class DevCredentials implements DbCredentials {
+public class DevProperties implements PropertiesProvider {
 
   @Value("${spring.datasource.username}")
   String userName;
@@ -16,8 +16,8 @@ public class DevCredentials implements DbCredentials {
   @Value("${spring.datasource.password}")
   String password;
 
-  @Value("${spring.datasource.dbName}")
-  String dbName;
+  @Value("${spring.datasource.database-name}")
+  String databaseName;
 
   @Value("${spring.datasource.driver-class-name}")
   String driverClassName;

@@ -1,12 +1,12 @@
-package by.leverx.googleTest.config.dbConfig;
+package by.leverx.googleTest.config.database;
 
-public interface DbCredentials {
+public interface PropertiesProvider {
 
   String getUserName();
 
   String getPassword();
 
-  String getDbName();
+  String getDatabaseName();
 
   String getHostName();
 
