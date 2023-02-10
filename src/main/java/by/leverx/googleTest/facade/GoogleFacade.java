@@ -6,7 +6,7 @@ import by.leverx.googleTest.exception.SuchFolderAlreadyExist;
 import by.leverx.googleTest.exception.SuchUserAlreadyExist;
 import by.leverx.googleTest.repository.UserInfoRepository;
 import by.leverx.googleTest.service.GoogleService;
-import by.leverx.googleTest.service.UserServiceImpl;
+import by.leverx.googleTest.service.UserInfoServiceImpl;
 import by.leverx.googleTest.user.UserInfo;
 import by.leverx.googleTest.user.dto.UserInfoCreationDto;
 import by.leverx.googleTest.user.dto.UserInfoDto;
@@ -22,13 +22,13 @@ public class GoogleFacade {
 
   private GoogleUtil util;
 
-  private UserServiceImpl userService;
+  private UserInfoServiceImpl userService;
 
   private UserInfoRepository repository;
 
   @Autowired
   public GoogleFacade(GoogleService service, GoogleUtil util, UserInfoRepository repository,
-      UserServiceImpl userService) {
+      UserInfoServiceImpl userService) {
 
     this.service = service;
     this.util = util;

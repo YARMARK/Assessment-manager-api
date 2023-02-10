@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserInfoServiceImpl implements UserInfoService {
 
   private UserInfoRepository repository;
 
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
   private UserUtil util;
 
   @Autowired
-  public UserServiceImpl(UserInfoRepository repository, UserMappingUtil mappingUtil,
+  public UserInfoServiceImpl(UserInfoRepository repository, UserMappingUtil mappingUtil,
       UserUtil util) {
     this.repository = repository;
     this.mappingUtil = mappingUtil;

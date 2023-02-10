@@ -3,7 +3,7 @@ package by.leverx.googleTest.service;
 import by.leverx.googleTest.user.dto.UserInfoCreationDto;
 import by.leverx.googleTest.user.dto.UserInfoDto;
 
-public interface UserService {
+public interface UserInfoService {
 
   UserInfoDto getUser(Long id);
 

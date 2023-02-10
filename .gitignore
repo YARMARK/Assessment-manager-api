@@ -33,3 +33,4 @@ build/
 .vscode/
 /src/main/resources/googleTestCred.json
 /tokens/
+/src/main/resources/.env
