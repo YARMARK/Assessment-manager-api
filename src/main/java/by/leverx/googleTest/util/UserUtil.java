@@ -10,15 +10,14 @@ public class UserUtil {
   public UserInfo setIncomeAndAssessmentDates(UserInfo userInfo){
     LocalDate dateOfIncoming = LocalDate.now();
     userInfo.setDateOfIncoming(dateOfIncoming);
-    userInfo.setLastAssessmentDate(dateOfIncoming);
+    userInfo.setPreviousAssessmentDate(dateOfIncoming);
     LocalDate nextAssessmentDate = dateOfIncoming.plusYears(1);
-    userInfo.setNextAssessmentDate(nextAssessmentDate);
     return userInfo;
   }
 
   public UserInfo setFolderUrl(UserInfo info, String folderId){
     String urlTemplates = "https://drive.google.com/drive/folders/" + folderId + "?usp=share_link";
-    info.setFolder_url(urlTemplates);
+    info.setLastAssessmentFolder(urlTemplates);
     return info;
   }
 }

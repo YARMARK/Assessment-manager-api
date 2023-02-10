@@ -1,10 +1,5 @@
 package by.leverx.googleTest.user;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Column;
@@ -14,10 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.print.attribute.standard.MediaSize.NA;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Entity
 @Data
@@ -36,22 +29,24 @@ public class UserInfo implements Serializable {
   @Column(name = "last_name")
   private String lastName;
 
-  @Column(name = "folder_url")
-  private String folder_url;
+  @Column(name = "email")
+  private String email;
+
+  @Column(name = "last_assessment_folder")
+  private String lastAssessmentFolder;
+
+  @Column(name = "title")
+  private String title;
+
+  @Column(name = "team_name")
+  private String teamName;
 
   @Column (name = "date_of_incoming")
-//  @JsonSerialize(using = LocalDateSerializer.class)
-//  @JsonDeserialize(using = LocalDateDeserializer.class)
-//  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   private LocalDate dateOfIncoming;
 
-  @Column(name = "last_assessment")
-//  @JsonSerialize(using = LocalDateSerializer.class)
-//  @JsonDeserialize(using = LocalDateDeserializer.class)
-  private LocalDate lastAssessmentDate;
+  @Column(name = "previous_assessment_date")
+  private LocalDate previousAssessmentDate;
 
-  @Column(name = "next_assessment")
-//  @JsonSerialize(using = LocalDateSerializer.class)
-//  @JsonDeserialize(using = LocalDateDeserializer.class)
-  private LocalDate nextAssessmentDate;
+  private Boolean needAssessment;
+
 }

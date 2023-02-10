@@ -17,7 +17,13 @@ public class UserInfoDto {
 
   private String lastName;
 
-  private String folder_url;
+  private String email;
+
+  private String lastAssessmentFolder;
+
+  private String title;
+
+  private String teamName;
 
   @JsonSerialize(using = LocalDateSerializer.class)
   @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -27,10 +33,12 @@ public class UserInfoDto {
   @JsonSerialize(using = LocalDateSerializer.class)
   @JsonDeserialize(using = LocalDateDeserializer.class)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-  private LocalDate lastAssessmentDate;
+  private LocalDate previousAssessmentDate;
 
   @JsonSerialize(using = LocalDateSerializer.class)
   @JsonDeserialize(using = LocalDateDeserializer.class)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   private LocalDate nextAssessmentDate;
+
+  private Boolean needAssessment;
 }
