@@ -6,19 +6,18 @@ spring:
     console:
       enabled: true
   datasource:
-    dbName: driveDb
+    database-name: driveDb
     username: sa
     password:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
   liquibase:
-    change-log: classpath:changelog/db.changelog-master.xml
-    enabled: true
+    enabled: false
 server:
   port: 8085
   error:

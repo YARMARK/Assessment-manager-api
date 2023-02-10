@@ -1,4 +1,4 @@
-package by.leverx.googleTest.config.dbConfig;
+package by.leverx.googleTest.config.database;
 
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
@@ -7,36 +7,37 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
-public class DbConfiguration {
+public class DatabaseConfig {
 
-  private final DbCredentials credentials;
+  private final PropertiesProvider properties;
 
-  public DbConfiguration(DbCredentials credentials) {
-    this.credentials = credentials;
+  public DatabaseConfig(PropertiesProvider credentials) {
+    this.properties = credentials;
   }
 
   @Profile(value = "dev")
   @Bean
   public DataSource getDataSource() {
-
     var dataSource = new DriverManagerDataSource();
-    dataSource.setUrl("jdbc:h2:mem:" + credentials.getDbName() + ";DB_CLOSE_DELAY=-1");
-    dataSource.setUsername(credentials.getUserName());
-    dataSource.setPassword(credentials.getPassword());
-    dataSource.setDriverClassName(credentials.getDriverClassName());
+
+    dataSource.setUrl("jdbc:h2:mem:" + properties.getDatabaseName() + ";DB_CLOSE_DELAY=-1");
+    dataSource.setUsername(properties.getUserName());
+    dataSource.setPassword(properties.getPassword());
+    dataSource.setDriverClassName(properties.getDriverClassName());
 
     return dataSource;
   }
 
+  @Profile(value = "test")
   @Bean
   public DataSource getTestDataSource() {
     var dataSource = new DriverManagerDataSource();
 
-    dataSource.setUrl("jdbc:postgresql://" + credentials.getHostName() + ":" + credentials.getPort() +
-        "/" + credentials.getDbName());
-    dataSource.setUsername(credentials.getUserName());
-    dataSource.setPassword(credentials.getPassword());
-    dataSource.setDriverClassName(credentials.getDriverClassName());
+    dataSource.setUrl("jdbc:postgresql://" + properties.getHostName() + ":" + properties.getPort() +
+        "/" + properties.getDatabaseName());
+    dataSource.setUsername(properties.getUserName());
+    dataSource.setPassword(properties.getPassword());
+    dataSource.setDriverClassName(properties.getDriverClassName());
 
     return dataSource;
   }
