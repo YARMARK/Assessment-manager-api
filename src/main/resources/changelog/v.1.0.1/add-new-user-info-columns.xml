@@ -4,10 +4,14 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-  <changeSet id="add-tag-1.0.0" author="Yar">
-    <tagDatabase tag="v.1.0.0"/>
+  <changeSet id="add_new_user_info_columns" author="Yar">
+    <addColumn tableName="user_info">
+      <column name="title"
+          type="VARCHAR"/>
+      <column name="team_name"
+          type="VARCHAR"/>
+      <column name="e_mail"
+          type="VARCHAR"/>
+    </addColumn>
   </changeSet>
-
-  <include file="creat-sequence.xml" relativeToChangelogFile="true"/>
-  <include file="creat-user-info-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

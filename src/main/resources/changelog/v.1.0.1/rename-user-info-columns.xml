@@ -4,10 +4,12 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-  <changeSet id="add-tag-1.0.0" author="Yar">
-    <tagDatabase tag="v.1.0.0"/>
+  <changeSet id="rename_user_info_columns" author="Yar">
+    <renameColumn tableName="user_info"
+      oldColumnName="folder_url"
+      newColumnName="last_assessment_folder"/>
+    <renameColumn tableName="user_info"
+      oldColumnName="last_assessment"
+      newColumnName="previous_assessment_date"/>
   </changeSet>
-
-  <include file="creat-sequence.xml" relativeToChangelogFile="true"/>
-  <include file="creat-user-info-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

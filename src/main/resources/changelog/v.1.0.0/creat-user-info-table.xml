@@ -4,7 +4,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-  <changeSet id="creat_user_table" author="Yar">
+  <changeSet id="creat_user_info_table" author="Yar">
     <createTable tableName="user_info">
       <column name="user_id" type="BIGINT" defaultValueComputed="nextval('user_seq')">
         <constraints primaryKey="true" unique="true"/>

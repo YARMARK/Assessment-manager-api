@@ -8,6 +8,7 @@
     <tagDatabase tag="v.1.0.0"/>
   </changeSet>
 
-  <include file="creat-sequence.xml" relativeToChangelogFile="true"/>
-  <include file="creat-user-info-table.xml" relativeToChangelogFile="true"/>
+  <include file="drop-user-info-columns.xml" relativeToChangelogFile="true"/>
+  <include file="rename-user-info-columns.xml" relativeToChangelogFile="true"/>
+  <include file="add-new-user-info-columns.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
