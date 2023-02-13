@@ -1,30 +1,30 @@
 package by.leverx.googleTest.util;
 
-import by.leverx.googleTest.user.UserInfo;
-import by.leverx.googleTest.user.dto.UserInfoCreationDto;
-import by.leverx.googleTest.user.dto.UserInfoDto;
+import by.leverx.googleTest.employee.EmployeeInfo;
+import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
+import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMappingUtil {
+public class EmployeeMappingUtil {
 
   private ModelMapper mapper;
 
-  private UserUtil util;
+  private EmployeeUtil util;
 
   @Autowired
-  public UserMappingUtil(ModelMapper mapper, UserUtil util) {
+  public EmployeeMappingUtil(ModelMapper mapper, EmployeeUtil util) {
     this.mapper = mapper;
     this.util = util;
   }
 
-  public UserInfo mapToUser(UserInfoCreationDto creationDto) {
-    return this.mapper.map(creationDto, UserInfo.class);
+  public EmployeeInfo mapToEmployee(EmployeeInfoCreationDto creationDto) {
+    return this.mapper.map(creationDto, EmployeeInfo.class);
   }
 
-  public UserInfoDto mapToDto (UserInfo info){
-    return this.mapper.map(info,UserInfoDto.class);
+  public EmployeeInfoDto mapToDto (EmployeeInfo info){
+    return this.mapper.map(info, EmployeeInfoDto.class);
   }
 }

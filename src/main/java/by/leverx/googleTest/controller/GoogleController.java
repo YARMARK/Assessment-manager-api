@@ -1,8 +1,8 @@
 package by.leverx.googleTest.controller;
 
 import by.leverx.googleTest.facade.GoogleFacade;
-import by.leverx.googleTest.user.dto.UserInfoCreationDto;
-import by.leverx.googleTest.user.dto.UserInfoDto;
+import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
+import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import java.util.Objects;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,24 +26,24 @@ public class GoogleController {
     this.facade = facade;
   }
 
-  @GetMapping("/user/{id}")
-  public ResponseEntity<UserInfoDto> getUser(@PathVariable("id") Long id) {
-    UserInfoDto userById = facade.getUserById(id);
-    return Objects.nonNull(userById) ? ResponseEntity.ok().body(userById)
-        : ResponseEntity.notFound().build();
-  }
+//  @GetMapping("/user/{id}")
+//  public ResponseEntity<EmployeeInfoDto> getUser(@PathVariable("id") Long id) {
+//    EmployeeInfoDto userById = facade.getEmployeeById(id);
+//    return Objects.nonNull(userById) ? ResponseEntity.ok().body(userById)
+//        : ResponseEntity.notFound().build();
+//  }
 
-  @PostMapping("/creatFolder")
-  public ResponseEntity<String> createFolderByFirstNameAndLastName(
-      @Valid @RequestBody UserInfoCreationDto infoDto) throws Exception {
-    String folderByName = facade.processUserInfo(infoDto);
-    return ResponseEntity.ok().body(folderByName);
-  }
+//  @PostMapping("/creatFolder")
+//  public ResponseEntity<String> createFolderByFirstNameAndLastName(
+//      @Valid @RequestBody EmployeeInfoCreationDto infoDto) throws Exception {
+//    String folderByName = facade.processEmployeeInfo(infoDto);
+//    return ResponseEntity.ok().body(folderByName);
+//  }
 
-  @DeleteMapping("/deleteFolder/{firstName}/{lastName}")
-  public ResponseEntity<Void> deleteByUserName(@PathVariable("firstName") String firstName,
-      @PathVariable("lastName") String lastName) throws Exception {
-    facade.deleteFolderAndUser(firstName, lastName);
-    return ResponseEntity.notFound().build();
-  }
+//  @DeleteMapping("/deleteFolder/{firstName}/{lastName}")
+//  public ResponseEntity<Void> deleteByUserName(@PathVariable("firstName") String firstName,
+//      @PathVariable("lastName") String lastName) throws Exception {
+//    facade.deleteFolderAndEmployee(firstName, lastName);
+//    return ResponseEntity.notFound().build();
+//  }
 }

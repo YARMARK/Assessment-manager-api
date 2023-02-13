@@ -1,17 +1,21 @@
 package by.leverx.googleTest.service;
 
-import by.leverx.googleTest.user.UserInfo;
-import by.leverx.googleTest.user.dto.UserInfoCreationDto;
-import by.leverx.googleTest.user.dto.UserInfoDto;
+import by.leverx.googleTest.employee.EmployeeInfo;
+import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
+import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import java.util.List;
 
-public interface UserInfoService {
+public interface EmployeeInfoService {
 
-  UserInfoDto getUser(Long id);
+  EmployeeInfoDto getEmployeeById(Long id);
 
-  UserInfoDto saveUser (UserInfoCreationDto creationDto, String folderId);
+  List<EmployeeInfoDto> getAllEmployees();
 
-  List<UserInfoDto> saveAllUserInfo (List<UserInfo> userInfoListFromJira);
+  EmployeeInfoDto saveEmployee(EmployeeInfo employeeInfo);
 
-  void deleteUser (String firstName, String lastName);
+  EmployeeInfoDto saveEmployeeByInfoAndFolderId(EmployeeInfoCreationDto creationDto);
+
+  List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfo> employeeInfoListFromJira);
+
+  void deleteEmployee(String firstName, String lastName);
 }

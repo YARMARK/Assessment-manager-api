@@ -1,11 +1,11 @@
 package by.leverx.googleTest.exception;
 
-public class UserNotFoundException  extends NullPointerException{
+public class EmployeeNotFoundException extends NullPointerException{
 
-  public UserNotFoundException(String s) {
+  public EmployeeNotFoundException(String s) {
     super(s);
   }
 
-  public UserNotFoundException() {
+  public EmployeeNotFoundException() {
   }
 }

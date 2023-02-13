@@ -1,4 +1,4 @@
-package by.leverx.googleTest.user.dto;
+package by.leverx.googleTest.employee.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserInfoDto {
+public class EmployeeInfoDto {
 
   private String firstName;
 
@@ -34,11 +34,6 @@ public class UserInfoDto {
   @JsonDeserialize(using = LocalDateDeserializer.class)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   private LocalDate previousAssessmentDate;
-
-  @JsonSerialize(using = LocalDateSerializer.class)
-  @JsonDeserialize(using = LocalDateDeserializer.class)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-  private LocalDate nextAssessmentDate;
 
   private Boolean needAssessment;
 }

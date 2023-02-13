@@ -7,10 +7,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableScheduling
-public class GoogleTestApplication {
+public class AssessmentManagerApi {
 
   public static void main(String[] args) {
-    SpringApplication.run(GoogleTestApplication.class, args);
+    SpringApplication.run(AssessmentManagerApi.class, args);
   }
 
 }

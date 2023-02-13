@@ -1,4 +1,4 @@
-package by.leverx.googleTest.user.dto;
+package by.leverx.googleTest.employee.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -8,15 +8,21 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserInfoCreationDto {
+public class EmployeeInfoCreationDto {
 
-  @NotBlank(message = "ENTER VALID FIRST NAME, THIS FIELD CAN'T BE BLANK")
-  @Size(min = 2, max = 20, message = "SIZE MUST BE BETWEEN 2 AND 20 SYMBOLS")
-  @Pattern(regexp = "[A-Z][a-z]{2,19}", message = "INVALID FIRST NAME VALUE")
+//  @NotBlank(message = "ENTER VALID FIRST NAME, THIS FIELD CAN'T BE BLANK")
+//  @Size(min = 2, max = 20, message = "SIZE MUST BE BETWEEN 2 AND 20 SYMBOLS")
+//  @Pattern(regexp = "[A-Z][a-z]{2,19}", message = "INVALID FIRST NAME VALUE")
   private String firstName;
 
-  @NotBlank(message = "ENTER VALID LAST NAME, THIS FIELD CAN'T BE BLANK")
-  @Size(min = 2, max = 30, message = "SIZE MUST BE BETWEEN 2 AND 30 SYMBOLS")
-  @Pattern(regexp = "[A-Z][a-z]{2,5}([a-z]{1,24}|\\-[A-Z][a-z]{2,24})", message = "INVALID LAST NAME VALUE")
+//  @NotBlank(message = "ENTER VALID LAST NAME, THIS FIELD CAN'T BE BLANK")
+//  @Size(min = 2, max = 30, message = "SIZE MUST BE BETWEEN 2 AND 30 SYMBOLS")
+//  @Pattern(regexp = "[A-Z][a-z]{2,5}([a-z]{1,24}|\\-[A-Z][a-z]{2,24})", message = "INVALID LAST NAME VALUE")
   private String lastName;
+
+  private String email;
+
+  private String title;
+
+
 }

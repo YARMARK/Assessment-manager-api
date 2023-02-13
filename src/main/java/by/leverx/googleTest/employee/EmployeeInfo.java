@@ -1,4 +1,4 @@
-package by.leverx.googleTest.user;
+package by.leverx.googleTest.employee;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Table(name = "user_info")
-public class UserInfo implements Serializable {
+public class EmployeeInfo implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")

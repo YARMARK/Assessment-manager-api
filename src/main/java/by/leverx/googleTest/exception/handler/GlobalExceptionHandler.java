@@ -2,8 +2,8 @@ package by.leverx.googleTest.exception.handler;
 
 import by.leverx.googleTest.exception.SomethingWentWrongException;
 import by.leverx.googleTest.exception.SuchFolderAlreadyExist;
-import by.leverx.googleTest.exception.SuchUserAlreadyExist;
-import by.leverx.googleTest.exception.UserNotFoundException;
+import by.leverx.googleTest.exception.SuchEmployeeAlreadyExist;
+import by.leverx.googleTest.exception.EmployeeNotFoundException;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -26,9 +26,9 @@ public class GlobalExceptionHandler {
         "Unable to create folder:" + ex.getDetails());
   }
 
-  @ExceptionHandler(SuchUserAlreadyExist.class)
+  @ExceptionHandler(SuchEmployeeAlreadyExist.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public @ResponseBody ErrorResponse handleSuchUserAlreadyExist(SuchUserAlreadyExist ex) {
+  public @ResponseBody ErrorResponse handleSuchEmployeeAlreadyExist(SuchEmployeeAlreadyExist ex) {
     return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
   }
 
@@ -57,14 +57,14 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(FileNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  public @ResponseBody ErrorResponse handleSuchUserAlreadyExist(FileNotFoundException ex) {
+  public @ResponseBody ErrorResponse handleSuchEmployeeAlreadyExist(FileNotFoundException ex) {
     return new ErrorResponse(HttpStatus.NOT_FOUND.value(),
         "THE SYSTEM CAN NOT FIND THE PATH SPECIFIED");
   }
 
-  @ExceptionHandler(UserNotFoundException.class)
+  @ExceptionHandler(EmployeeNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  public @ResponseBody ErrorResponse handleUserNotFound(UserNotFoundException ex) {
+  public @ResponseBody ErrorResponse handleEmployeeNotFound(EmployeeNotFoundException ex) {
     return new ErrorResponse(HttpStatus.NOT_FOUND.value(),
         ex.getMessage());
   }

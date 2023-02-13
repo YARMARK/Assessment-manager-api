@@ -1,11 +1,11 @@
 package by.leverx.googleTest.exception;
 
-public class SuchUserAlreadyExist  extends RuntimeException{
+public class SuchEmployeeAlreadyExist extends RuntimeException{
 
-  public SuchUserAlreadyExist(String message) {
+  public SuchEmployeeAlreadyExist(String message) {
     super(message);
   }
 
-  public SuchUserAlreadyExist() {
+  public SuchEmployeeAlreadyExist() {
   }
 }

@@ -1,5 +1,13 @@
 version: '3.6'
 services:
+  database:
+    build: database/
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - /drive-db-folder:/var/lib/postgresql/data
+
   software:
     restart: unless-stopped
     image: atlassian/jira-software:latest
@@ -17,3 +25,10 @@ services:
     ports:
       - '8085:8085'
     working_dir: /usr/src/app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/drive_db
+      - SPRING_PROFILES_ACTIVE=test
+    links:
+      - database:db
+    depends_on:
+      - database

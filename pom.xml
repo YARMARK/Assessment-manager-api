@@ -10,9 +10,9 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>by.leverx</groupId>
-  <artifactId>googleTest</artifactId>
+  <artifactId>Assessment-manager-api</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>googleTest</name>
+  <name>Assessment-manager-api</name>
   <description>googleTest</description>
   <properties>
     <java.version>11</java.version>
