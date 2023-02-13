@@ -1,12 +1,12 @@
 package by.leverx.googleTest.service;
 
-import by.leverx.googleTest.exception.UserNotFoundException;
-import by.leverx.googleTest.repository.UserInfoRepository;
-import by.leverx.googleTest.user.UserInfo;
-import by.leverx.googleTest.user.dto.UserInfoCreationDto;
-import by.leverx.googleTest.user.dto.UserInfoDto;
-import by.leverx.googleTest.util.UserMappingUtil;
-import by.leverx.googleTest.util.UserUtil;
+import by.leverx.googleTest.exception.EmployeeNotFoundException;
+import by.leverx.googleTest.repository.EmployeeInfoRepository;
+import by.leverx.googleTest.employee.EmployeeInfo;
+import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
+import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
+import by.leverx.googleTest.util.EmployeeMappingUtil;
+import by.leverx.googleTest.util.EmployeeUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,59 +15,77 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserInfoServiceImpl implements UserInfoService {
+public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 
-  private UserInfoRepository repository;
+  private EmployeeInfoRepository repository;
 
-  private UserMappingUtil mappingUtil;
+  private EmployeeMappingUtil mappingUtil;
 
-  private UserUtil util;
+  private EmployeeUtil util;
 
   @Autowired
-  public UserInfoServiceImpl(UserInfoRepository repository, UserMappingUtil mappingUtil,
-      UserUtil util) {
+  public EmployeeInfoServiceImpl(EmployeeInfoRepository repository, EmployeeMappingUtil mappingUtil,
+      EmployeeUtil util) {
     this.repository = repository;
     this.mappingUtil = mappingUtil;
     this.util = util;
   }
 
   @Override
-  public UserInfoDto getUser(Long id) {
+  public EmployeeInfoDto getEmployeeById(Long id) {
 
-    Optional<UserInfo> byId = repository.findById(id);
+    Optional<EmployeeInfo> byId = repository.findById(id);
     if (byId.isPresent()) {
       return mappingUtil.mapToDto(byId.get());
     }
-    throw new UserNotFoundException("USER NOT FOUND");
+    throw new EmployeeNotFoundException("EMPLOYEE NOT FOUND");
   }
 
   @Override
-  public UserInfoDto saveUser(UserInfoCreationDto creationDto, String folderId) {
-    UserInfo userInfoWithoutDates = mappingUtil.mapToUser(creationDto);
-    UserInfo userInfoWithDates =util.setIncomeAndAssessmentDates(userInfoWithoutDates);
-    userInfoWithDates = util.setFolderUrl(userInfoWithDates, folderId);
-    UserInfo save = repository.save(userInfoWithDates);
+  public List<EmployeeInfoDto> getAllEmployees() {
+    List<EmployeeInfo> allEmployees = repository.findAll();
+    List<EmployeeInfoDto> returnList = new ArrayList<>();
+    for (EmployeeInfo info : allEmployees){
+      returnList.add(mappingUtil.mapToDto(info));
+    }
+    return returnList;
+  }
+
+
+  @Override
+  public EmployeeInfoDto saveEmployee(EmployeeInfo employeeInfo) {
+    util.setIncomeAndAssessmentDates(employeeInfo);
+    return null;
+  }
+
+  @Override
+  public EmployeeInfoDto saveEmployeeByInfoAndFolderId(EmployeeInfoCreationDto creationDto) { // Delete folder ID
+    EmployeeInfo employeeInfoWithoutDates = mappingUtil.mapToEmployee(creationDto);
+    EmployeeInfo employeeInfoWithDates =util.setIncomeAndAssessmentDates(employeeInfoWithoutDates);
+//    employeeInfoWithDates = util.setFolderUrl(employeeInfoWithDates, folderId);
+    EmployeeInfo save = repository.save(employeeInfoWithDates);
     return mappingUtil.mapToDto(save);
   }
 
+
   @Override
-  public List<UserInfoDto> saveAllUserInfo(List<UserInfo> userInfoListFromJira) {
-    List <UserInfoDto> userInfoDtoList = new ArrayList<>();
-    for (UserInfo userInfo : userInfoListFromJira){
-      UserInfo savedUser = repository.save(userInfo);
-      userInfoDtoList.add(mappingUtil.mapToDto(savedUser));
+  public List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfo> employeeInfoListFromJira) {
+    List <EmployeeInfoDto> employeeInfoDtoList = new ArrayList<>();
+    for (EmployeeInfo employeeInfo : employeeInfoListFromJira){
+//      saveEmployeeByInfoAndFolderId(employeeInfo);
+//      employeeInfoDtoList.add(mappingUtil.mapToDto(savedUser));
     }
-    return userInfoDtoList;
+    return employeeInfoDtoList;
   }
 
   @Override
-  public void deleteUser(String firstName, String lastName) {
-    UserInfo byFirstNameAndLastName = repository.findByFirstNameAndLastName(firstName,
+  public void deleteEmployee(String firstName, String lastName) {
+    EmployeeInfo byFirstNameAndLastName = repository.findByFirstNameAndLastName(firstName,
         lastName);
     if (Objects.nonNull(byFirstNameAndLastName)) {
       repository.deleteById(byFirstNameAndLastName.getUserId());
     } else {
-      throw new UserNotFoundException("USER DOESN'T EXIST");
+      throw new EmployeeNotFoundException("USER DOESN'T EXIST");
     }
 
   }
