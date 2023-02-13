@@ -7,6 +7,8 @@ import by.leverx.googleTest.user.dto.UserInfoCreationDto;
 import by.leverx.googleTest.user.dto.UserInfoDto;
 import by.leverx.googleTest.util.UserMappingUtil;
 import by.leverx.googleTest.util.UserUtil;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,16 @@ public class UserInfoServiceImpl implements UserInfoService {
   }
 
   @Override
+  public List<UserInfoDto> saveAllUserInfo(List<UserInfo> userInfoListFromJira) {
+    List <UserInfoDto> userInfoDtoList = new ArrayList<>();
+    for (UserInfo userInfo : userInfoListFromJira){
+      UserInfo savedUser = repository.save(userInfo);
+      userInfoDtoList.add(mappingUtil.mapToDto(savedUser));
+    }
+    return userInfoDtoList;
+  }
+
+  @Override
   public void deleteUser(String firstName, String lastName) {
     UserInfo byFirstNameAndLastName = repository.findByFirstNameAndLastName(firstName,
         lastName);
@@ -57,5 +69,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     } else {
       throw new UserNotFoundException("USER DOESN'T EXIST");
     }
+
   }
 }
