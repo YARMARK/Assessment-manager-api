@@ -83,7 +83,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
     EmployeeInfo byFirstNameAndLastName = repository.findByFirstNameAndLastName(firstName,
         lastName);
     if (Objects.nonNull(byFirstNameAndLastName)) {
-      repository.deleteById(byFirstNameAndLastName.getUserId());
+      repository.deleteById(byFirstNameAndLastName.getEmployeeId());
     } else {
       throw new EmployeeNotFoundException("USER DOESN'T EXIST");
     }

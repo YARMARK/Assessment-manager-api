@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 @Data
 public class ProdProperties implements PropertiesProvider{
 
-  @Value("${vcap.services.my_db.credentials.username}")
+  @Value("${spring.datasource.username}")
   private String userName;
 
-  @Value("${vcap.services.my_db.credentials.password}")
+  @Value("${spring.datasource.password}")
   private String password;
 
   @Value(value = "${spring.datasource.driver-class-name}")

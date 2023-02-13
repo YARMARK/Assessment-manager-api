@@ -4,8 +4,8 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-  <changeSet id="add_new_user_info_columns" author="Yar">
-    <addColumn tableName="user_info">
+  <changeSet id="add_new_employee_info_columns" author="Yar">
+    <addColumn tableName="employee_info">
       <column name="title"
           type="VARCHAR"/>
       <column name="team_name"

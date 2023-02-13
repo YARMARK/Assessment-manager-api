@@ -42,18 +42,18 @@ public class DatabaseConfig {
     return dataSource;
   }
 
-  @Profile(value = "prod")
-  @Bean
-  public DataSource getProdDataSource() {
-    var dataSource = new DriverManagerDataSource();
-
-    dataSource.setUrl("jdbc:postgresql://" + properties.getUserName() + ":" + properties.getPassword() +
-        "@" + properties.getHostName() + ":" + properties.getPort() + "/"
-        + properties.getDatabaseName());
-    dataSource.setUsername(properties.getUserName());
-    dataSource.setPassword(properties.getPassword());
-    dataSource.setDriverClassName(properties.getDriverClassName());
-
-    return dataSource;
-  }
+//  @Profile(value = "prod")
+//  @Bean
+//  public DataSource getProdDataSource() {
+//    var dataSource = new DriverManagerDataSource();
+//
+//    dataSource.setUrl("jdbc:postgresql://" + properties.getUserName() + ":" + properties.getPassword() +
+//        "@" + properties.getHostName() + ":" + properties.getPort() + "/"
+//        + properties.getDatabaseName());
+//    dataSource.setUsername(properties.getUserName());
+//    dataSource.setPassword(properties.getPassword());
+//    dataSource.setDriverClassName(properties.getDriverClassName());
+//
+//    return dataSource;
+//  }
 }

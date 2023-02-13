@@ -3,6 +3,9 @@ spring:
     activate:
       on-profile: prod
   datasource:
+    username: ${vcap.services.my_db.credentials.username}
+    password: ${vcap.services.my_db.credentials.password}
+    url: jdbc:postgresql://${vcap.services.my_db.credentials.hostname}:${vcap.services.my_db.credentials.port}/${vcap.services.my_db.credentials.dbname}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -19,3 +22,8 @@ spring:
 server:
   error:
     include-message: always
+jira:
+  env:
+    url: ${JIRA_TEST_URL}
+    user-name: ${JIRA_TEST_USERNAME}
+    password: ${JIRA_TEST_PASSWORD}
