@@ -5,9 +5,9 @@
 * [General info](#general-info)
 * [Required functionality](#required-functionality)
 * [Technologies](#technologies)
-* [Setup](#setup)
 * [Run](#run)
 * [Run (by Cloud Foundry)](#run by cf)
+* [Possible issues](#possible issues)
 
 ## General info
 
