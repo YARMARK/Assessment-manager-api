@@ -4,10 +4,10 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-  <changeSet id="drop_employee_info_columns" author="Yar">
-    <dropColumn tableName="employee_info">
-      <column name="next_assessment"/>
-    </dropColumn>
+  <changeSet id="add_new_employee_info_columns" author="Yar">
+    <addColumn tableName="employee_info">
+      <column name="need_assessment"
+        type="BOOLEAN"/>
+    </addColumn>
   </changeSet>
-
 </databaseChangeLog>

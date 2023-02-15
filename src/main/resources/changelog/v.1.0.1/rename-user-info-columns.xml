@@ -4,11 +4,11 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-  <changeSet id="rename_user_info_columns" author="Yar">
-    <renameColumn tableName="user_info"
+  <changeSet id="rename_employee_info_columns" author="Yar">
+    <renameColumn tableName="employee_info"
       oldColumnName="folder_url"
       newColumnName="last_assessment_folder"/>
-    <renameColumn tableName="user_info"
+    <renameColumn tableName="employee_info"
       oldColumnName="last_assessment"
       newColumnName="previous_assessment_date"/>
   </changeSet>
