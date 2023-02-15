@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "user_info")
+@Table(name = "employee_info")
 public class EmployeeInfo implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
-  @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1)
-  private Long userId;
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_gen")
+  @SequenceGenerator(name = "employee_gen", sequenceName = "employee_seq", allocationSize = 1)
+  private Long employeeId;
 
   @Column(name = "first_name")
   private String firstName;
@@ -47,6 +47,6 @@ public class EmployeeInfo implements Serializable {
   @Column(name = "previous_assessment_date")
   private LocalDate previousAssessmentDate;
 
+  @Column(name = "need_assessment")
   private Boolean needAssessment;
-
 }

@@ -45,7 +45,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   public List<EmployeeInfoDto> getAllEmployees() {
     List<EmployeeInfo> allEmployees = repository.findAll();
     List<EmployeeInfoDto> returnList = new ArrayList<>();
-    for (EmployeeInfo info : allEmployees){
+    for (EmployeeInfo info : allEmployees) {
       returnList.add(mappingUtil.mapToDto(info));
     }
     return returnList;
@@ -59,9 +59,10 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   }
 
   @Override
-  public EmployeeInfoDto saveEmployeeByInfoAndFolderId(EmployeeInfoCreationDto creationDto) { // Delete folder ID
+  public EmployeeInfoDto saveEmployeeByInfoAndFolderId(
+      EmployeeInfoCreationDto creationDto) { // Delete folder ID
     EmployeeInfo employeeInfoWithoutDates = mappingUtil.mapToEmployee(creationDto);
-    EmployeeInfo employeeInfoWithDates =util.setIncomeAndAssessmentDates(employeeInfoWithoutDates);
+    EmployeeInfo employeeInfoWithDates = util.setIncomeAndAssessmentDates(employeeInfoWithoutDates);
 //    employeeInfoWithDates = util.setFolderUrl(employeeInfoWithDates, folderId);
     EmployeeInfo save = repository.save(employeeInfoWithDates);
     return mappingUtil.mapToDto(save);
@@ -69,11 +70,11 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 
 
   @Override
-  public List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfo> employeeInfoListFromJira) {
-    List <EmployeeInfoDto> employeeInfoDtoList = new ArrayList<>();
-    for (EmployeeInfo employeeInfo : employeeInfoListFromJira){
-//      saveEmployeeByInfoAndFolderId(employeeInfo);
-//      employeeInfoDtoList.add(mappingUtil.mapToDto(savedUser));
+  public List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfoCreationDto> input) {
+    List<EmployeeInfoDto> employeeInfoDtoList = new ArrayList<>();
+    for (EmployeeInfoCreationDto employeeInfo : input) {
+      EmployeeInfoDto employeeInfoDto = saveEmployeeByInfoAndFolderId(employeeInfo);
+      employeeInfoDtoList.add(employeeInfoDto);
     }
     return employeeInfoDtoList;
   }
@@ -83,7 +84,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
     EmployeeInfo byFirstNameAndLastName = repository.findByFirstNameAndLastName(firstName,
         lastName);
     if (Objects.nonNull(byFirstNameAndLastName)) {
-      repository.deleteById(byFirstNameAndLastName.getUserId());
+      repository.deleteById(byFirstNameAndLastName.getEmployeeId());
     } else {
       throw new EmployeeNotFoundException("USER DOESN'T EXIST");
     }

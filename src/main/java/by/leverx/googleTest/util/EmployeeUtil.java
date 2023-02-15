@@ -1,6 +1,8 @@
 package by.leverx.googleTest.util;
 
 import by.leverx.googleTest.employee.EmployeeInfo;
+import by.leverx.googleTest.employee.EmployeeInfoMapping;
+import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
 import by.leverx.googleTest.repository.EmployeeInfoRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -43,5 +45,15 @@ public class EmployeeUtil {
       }
     }
     return employeesList;
+  }
+
+  public Boolean checkValidEmployee(EmployeeInfoCreationDto creationDto) {
+    EmployeeInfo byFirstNameAndLastName = repository.findByFirstNameAndLastName(
+        creationDto.getFirstName(), creationDto.getLastName());
+    if (Objects.isNull(byFirstNameAndLastName)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
