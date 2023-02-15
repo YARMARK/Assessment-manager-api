@@ -8,7 +8,7 @@
     <tagDatabase tag="v.1.0.0"/>
   </changeSet>
 
-  <include file="drop-user-info-columns.xml" relativeToChangelogFile="true"/>
-  <include file="rename-user-info-columns.xml" relativeToChangelogFile="true"/>
-  <include file="add-new-user-info-columns.xml" relativeToChangelogFile="true"/>
+  <include file="drop-employee-info-columns.xml" relativeToChangelogFile="true"/>
+  <include file="rename-employee-info-columns.xml" relativeToChangelogFile="true"/>
+  <include file="add-new-employee-info-columns.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

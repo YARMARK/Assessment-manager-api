@@ -10,7 +10,7 @@
         type="VARCHAR"/>
       <column name="team_name"
         type="VARCHAR"/>
-      <column name="e_mail"
+      <column name="email"
         type="VARCHAR"/>
     </addColumn>
   </changeSet>
