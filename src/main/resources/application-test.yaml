@@ -1,0 +1,26 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    database-name: board_db
+    username: postgres
+    password: example
+    hostname: database
+    port: 5432
+  jpa:
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:changelog/db.changelog-master.xml
+    enabled: true
+server:
+  error:
+    include-message: always
+  port: 8085
+jira:
+  env:
+    url: ${JIRA_TEST_URL}
+    user-name: ${JIRA_TEST_USERNAME}
+    password: ${JIRA_TEST_PASSWORD}
