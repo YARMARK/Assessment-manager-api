@@ -15,6 +15,9 @@ spring:
   liquibase:
     change-log: classpath:changelog/db.changelog-master.xml
     enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 server:
   error:
     include-message: always
@@ -24,3 +27,6 @@ jira:
     url: ${JIRA_TEST_URL}
     user-name: ${JIRA_TEST_USERNAME}
     password: ${JIRA_TEST_PASSWORD}
+templates:
+  env:
+    folder: ${TEMPLATES_FOLDER}

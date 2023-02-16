@@ -27,3 +27,6 @@ jira:
     url: ${JIRA_TEST_URL}
     user-name: ${JIRA_TEST_USERNAME}
     password: ${JIRA_TEST_PASSWORD}
+templates:
+  env:
+    folder: ${TEMPLATES_FOLDER}

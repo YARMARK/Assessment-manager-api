@@ -18,6 +18,9 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
   liquibase:
     enabled: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 server:
   port: 8085
   error:
@@ -27,3 +30,6 @@ jira:
     url: ${JIRA_TEST_URL}
     user-name: ${JIRA_TEST_USERNAME}
     password: ${JIRA_TEST_PASSWORD}
+templates:
+  env:
+    folder: ${TEMPLATES_FOLDER}
