@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,6 +49,17 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
     List<EmployeeInfo> allEmployees = repository.findAll();
     List<EmployeeInfoDto> returnList = new ArrayList<>();
     for (EmployeeInfo info : allEmployees) {
+      returnList.add(mappingUtil.mapToDto(info));
+    }
+    return returnList;
+  }
+
+  @Override
+  public List<EmployeeInfoDto> getAllEmployeesPage(int page, int size) {
+    Pageable pageable = PageRequest.of(page, size);
+    List<EmployeeInfoDto> returnList = new ArrayList<>();
+    Page<EmployeeInfo> employeePage = repository.findAll(pageable);
+    for (EmployeeInfo info : employeePage) {
       returnList.add(mappingUtil.mapToDto(info));
     }
     return returnList;

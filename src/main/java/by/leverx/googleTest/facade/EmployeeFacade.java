@@ -1,6 +1,5 @@
 package by.leverx.googleTest.facade;
 
-import by.leverx.googleTest.employee.EmployeeInfo;
 import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
 import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import by.leverx.googleTest.exception.SuchEmployeeAlreadyExist;
@@ -35,6 +34,10 @@ public class EmployeeFacade {
 
   public List<EmployeeInfoDto> getAllEmployees() {
     return employeeInfoService.getAllEmployees();
+  }
+
+  public List<EmployeeInfoDto> getAllEmployeesPage(int page, int size){
+    return employeeInfoService.getAllEmployeesPage(page,size);
   }
 
   public EmployeeInfoDto saveEmployeeInfo(EmployeeInfoCreationDto creationDto) {

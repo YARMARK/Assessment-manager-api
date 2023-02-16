@@ -1,9 +1,13 @@
 package by.leverx.googleTest.controller;
 
+import by.leverx.googleTest.config.SwaggerConfig;
 import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
 import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import by.leverx.googleTest.facade.EmployeeFacade;
 import by.leverx.googleTest.service.GoogleService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -17,9 +21,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
+@Api(tags = {SwaggerConfig.EMPLOYEE_TAG})
 public class EmployeeController {
 
   private EmployeeFacade facade;
@@ -46,6 +52,17 @@ public class EmployeeController {
         : ResponseEntity.notFound().build();
   }
 
+  @GetMapping("/employeesPage")
+  @ApiOperation("returns pagination list of employee.")
+  public ResponseEntity<List<EmployeeInfoDto>> getEmployeesPage(
+      @ApiParam("Page number.") @RequestParam(defaultValue = "0") int page,
+      @ApiParam("Page size.") @RequestParam(defaultValue = "10") int size) {
+    List<EmployeeInfoDto> allEmployees = facade.getAllEmployeesPage(page,size);
+    return !allEmployees.isEmpty() ? ResponseEntity.ok().body(allEmployees)
+        : ResponseEntity.notFound().build();
+  }
+
+
   @GetMapping("/templateFiles")
   public ResponseEntity<List<String>> getFileList() throws IOException, URISyntaxException {
     List<String> listOfFileNames = service.getListOfFileNames();
@@ -63,7 +80,7 @@ public class EmployeeController {
   @DeleteMapping("/employees/{firstName}/{lastName}")
   public ResponseEntity<Void> deleteEmployeeByFirstAndLastName(@PathVariable String firstName,
       @PathVariable String lastName) {
-    facade.deleteEmployeeByFirstAndLastName(firstName,lastName);
+    facade.deleteEmployeeByFirstAndLastName(firstName, lastName);
     return ResponseEntity.notFound().build();
   }
 

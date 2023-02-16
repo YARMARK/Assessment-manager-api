@@ -10,6 +10,8 @@ public interface EmployeeInfoService {
 
   List<EmployeeInfoDto> getAllEmployees();
 
+  List<EmployeeInfoDto> getAllEmployeesPage(int page, int size);
+
   EmployeeInfoDto saveEmployeeByInfoAndFolderId(EmployeeInfoCreationDto creationDto);
 
   List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfoCreationDto> employeeInfoListFromJira);
