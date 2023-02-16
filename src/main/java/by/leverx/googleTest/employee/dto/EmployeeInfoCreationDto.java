@@ -24,5 +24,5 @@ public class EmployeeInfoCreationDto {
 
   private String title;
 
-
+  private Boolean needAssessment = Boolean.FALSE;
 }
