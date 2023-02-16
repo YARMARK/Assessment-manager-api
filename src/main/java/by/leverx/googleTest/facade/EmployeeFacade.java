@@ -29,13 +29,13 @@ public class EmployeeFacade {
     this.util = util;
   }
 
-  public EmployeeInfoDto getEmployeeById(Long id){
+  public EmployeeInfoDto getEmployeeById(Long id) {
     return employeeInfoService.getEmployeeById(id);
-   }
+  }
 
-   public List<EmployeeInfoDto> getAllEmployees(){
+  public List<EmployeeInfoDto> getAllEmployees() {
     return employeeInfoService.getAllEmployees();
-   }
+  }
 
   public EmployeeInfoDto saveEmployeeInfo(EmployeeInfoCreationDto creationDto) {
     if (!util.checkValidEmployee(creationDto)) {
@@ -44,13 +44,25 @@ public class EmployeeFacade {
     throw new SuchEmployeeAlreadyExist("EMPLOYEE ALREADY CREATED");
   }
 
-  public List <EmployeeInfoDto> saveEmployeeList(List<EmployeeInfoCreationDto> inputList){
+  public List<EmployeeInfoDto> saveEmployeeList(List<EmployeeInfoCreationDto> inputList) {
     List<EmployeeInfoCreationDto> savedEmployees = new ArrayList<>();
-    for (EmployeeInfoCreationDto info : inputList){
-      if (!util.checkValidEmployee(info)){
+    for (EmployeeInfoCreationDto info : inputList) {
+      if (!util.checkValidEmployee(info)) {
         savedEmployees.add(info);
       }
     }
     return employeeInfoService.saveAllEmployeesInfo(savedEmployees);
+  }
+
+  public void deleteEmployeeByFirstAndLastName(String firstName, String lastName) {
+    employeeInfoService.deleteEmployeeByFirstAndLastName(firstName, lastName);
+  }
+
+  public void deleteEmployeeById(Long id) {
+    employeeInfoService.deleteEmployeeById(id);
+  }
+
+  public void deleteAllEmployees(){
+    employeeInfoService.deleteAllEmployees();
   }
 }

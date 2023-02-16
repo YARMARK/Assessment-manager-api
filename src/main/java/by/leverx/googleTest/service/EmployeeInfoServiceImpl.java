@@ -51,13 +51,6 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
     return returnList;
   }
 
-
-  @Override
-  public EmployeeInfoDto saveEmployee(EmployeeInfo employeeInfo) {
-    util.setIncomeAndAssessmentDates(employeeInfo);
-    return null;
-  }
-
   @Override
   public EmployeeInfoDto saveEmployeeByInfoAndFolderId(
       EmployeeInfoCreationDto creationDto) { // Delete folder ID
@@ -80,14 +73,29 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   }
 
   @Override
-  public void deleteEmployee(String firstName, String lastName) {
+  public void deleteEmployeeByFirstAndLastName(String firstName, String lastName) {
     EmployeeInfo byFirstNameAndLastName = repository.findByFirstNameAndLastName(firstName,
         lastName);
     if (Objects.nonNull(byFirstNameAndLastName)) {
       repository.deleteById(byFirstNameAndLastName.getEmployeeId());
     } else {
-      throw new EmployeeNotFoundException("USER DOESN'T EXIST");
+      throw new EmployeeNotFoundException("EMPLOYEE NOT FOUND");
     }
-
   }
+
+  @Override
+  public void deleteEmployeeById(Long id) {
+    Optional<EmployeeInfo> byId = repository.findById(id);
+    if (byId.isPresent()) {
+      repository.deleteById(id);
+    } else {
+      throw new EmployeeNotFoundException("EMPLOYEE NOT FOUND");
+    }
+  }
+
+  @Override
+  public void deleteAllEmployees(){
+    repository.deleteAll();
+  }
+
 }
