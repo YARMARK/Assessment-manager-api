@@ -4,9 +4,9 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-  <changeSet id="add-tag-1.0.0" author="Yar">
-    <tagDatabase tag="v.1.0.0"/>
+  <changeSet id="update_employee_info_columns" author="Yar">
+    <update tableName="employee_info">
+      <column name="need_assessment" defaultValue="false"/>
+    </update>
   </changeSet>
-  <include file="add-new-employee-info-columns.xml" relativeToChangelogFile="true"/>
-  <include file="modify-employee-info-columns.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
