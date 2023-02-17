@@ -8,7 +8,9 @@ import by.leverx.googleTest.service.EmployeeInfoServiceImpl;
 import by.leverx.googleTest.util.EmployeeUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -36,8 +38,8 @@ public class EmployeeFacade {
     return employeeInfoService.getAllEmployees();
   }
 
-  public List<EmployeeInfoDto> getAllEmployeesPage(int page, int size){
-    return employeeInfoService.getAllEmployeesPage(page,size);
+  public Map<String,Object> getAllEmployeesPage(Pageable pageable){
+    return employeeInfoService.getAllEmployeesPage(pageable);
   }
 
   public EmployeeInfoDto saveEmployeeInfo(EmployeeInfoCreationDto creationDto) {

@@ -8,7 +8,9 @@ import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import by.leverx.googleTest.util.EmployeeMappingUtil;
 import by.leverx.googleTest.util.EmployeeUtil;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,14 +57,18 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   }
 
   @Override
-  public List<EmployeeInfoDto> getAllEmployeesPage(int page, int size) {
-    Pageable pageable = PageRequest.of(page, size);
-    List<EmployeeInfoDto> returnList = new ArrayList<>();
+  public Map<String,Object> getAllEmployeesPage(Pageable pageable) {
+    List<EmployeeInfoDto> targetData = new ArrayList<>();
+    Map<String,Object> result = new HashMap<>();
     Page<EmployeeInfo> employeePage = repository.findAll(pageable);
-    for (EmployeeInfo info : employeePage) {
-      returnList.add(mappingUtil.mapToDto(info));
+    for (EmployeeInfo info : employeePage.getContent()) {
+      targetData.add(mappingUtil.mapToDto(info));
     }
-    return returnList;
+    result.put("employee",targetData);
+    result.put("currentPage", employeePage.getNumber());
+    result.put("totalEmployees", employeePage.getTotalElements());
+    result.put("totalPages", employeePage.getTotalPages());
+    return result;
   }
 
   @Override

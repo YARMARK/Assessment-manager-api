@@ -3,6 +3,8 @@ package by.leverx.googleTest.service;
 import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
 import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import java.util.List;
+import java.util.Map;
+import org.springframework.data.domain.Pageable;
 
 public interface EmployeeInfoService {
 
@@ -10,7 +12,7 @@ public interface EmployeeInfoService {
 
   List<EmployeeInfoDto> getAllEmployees();
 
-  List<EmployeeInfoDto> getAllEmployeesPage(int page, int size);
+  Map<String, Object> getAllEmployeesPage(Pageable pageable);
 
   EmployeeInfoDto saveEmployeeByInfoAndFolderId(EmployeeInfoCreationDto creationDto);
 
