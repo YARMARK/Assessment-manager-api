@@ -30,7 +30,7 @@ public class GoogleService {
     this.manager = manager;
   }
 
-  private String createFolderByName(String folderName)
+  public String createFolderByName(String folderName)
       throws GeneralSecurityException, IOException {
     var fileMetaData = new File();
     fileMetaData.setName(folderName)
