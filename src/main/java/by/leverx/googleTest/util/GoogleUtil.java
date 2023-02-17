@@ -51,6 +51,9 @@ public class GoogleUtil {
   public void checkCurrentMontFolder() throws Exception {
     LocalDate currentDate = LocalDate.now();
     String currentMonthFolder = currentDate.getYear() + "." + currentDate.getMonthValue();
+    if(currentDate.getMonthValue()<= 9){
+      currentMonthFolder = currentDate.getYear() + ".0" + currentDate.getMonthValue();
+    }
     String folderId = searchFolderByFolderName(currentMonthFolder);
     if (Objects.isNull(folderId)){
       googleService.createFolderByName(currentMonthFolder);
