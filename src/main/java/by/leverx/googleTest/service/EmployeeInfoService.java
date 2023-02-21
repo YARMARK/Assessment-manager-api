@@ -18,6 +18,8 @@ public interface EmployeeInfoService {
 
   List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfoCreationDto> employeeInfoListFromJira);
 
+  List<EmployeeInfoDto> updateAssessmentDate( List<EmployeeInfoDto> employeesList);
+
   void deleteEmployeeByFirstAndLastName(String firstName, String lastName);
 
   void deleteEmployeeById(Long id);

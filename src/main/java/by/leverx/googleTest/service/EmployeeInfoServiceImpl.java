@@ -1,10 +1,10 @@
 package by.leverx.googleTest.service;
 
-import by.leverx.googleTest.exception.EmployeeNotFoundException;
-import by.leverx.googleTest.repository.EmployeeInfoRepository;
 import by.leverx.googleTest.employee.EmployeeInfo;
 import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
 import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
+import by.leverx.googleTest.exception.EmployeeNotFoundException;
+import by.leverx.googleTest.repository.EmployeeInfoRepository;
 import by.leverx.googleTest.util.EmployeeMappingUtil;
 import by.leverx.googleTest.util.EmployeeUtil;
 import java.util.ArrayList;
@@ -15,7 +15,6 @@ import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -90,6 +89,17 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
       employeeInfoDtoList.add(employeeInfoDto);
     }
     return employeeInfoDtoList;
+  }
+
+  @Override
+  public List<EmployeeInfoDto> updateAssessmentDate(List<EmployeeInfoDto> employeesList) {
+    List<EmployeeInfoDto> returnList = new ArrayList<>();
+    List<EmployeeInfo> updatedList = util.updateAssessmentMarker(employeesList);
+    for (EmployeeInfo infoDto : updatedList) {
+          repository.save(infoDto);
+      returnList.add(mappingUtil.mapToDto(infoDto));
+    }
+    return returnList;
   }
 
   @Override

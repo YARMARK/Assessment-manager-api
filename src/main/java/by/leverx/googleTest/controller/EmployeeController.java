@@ -4,7 +4,7 @@ import by.leverx.googleTest.config.SwaggerConfig;
 import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
 import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import by.leverx.googleTest.facade.EmployeeFacade;
-import by.leverx.googleTest.service.GoogleService;
+import by.leverx.googleTest.service.GoogleServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -32,10 +32,10 @@ public class EmployeeController {
 
   private EmployeeFacade facade;
 
-  private GoogleService service;
+  private GoogleServiceImpl service;
 
   @Autowired
-  public EmployeeController(EmployeeFacade facade, GoogleService service) {
+  public EmployeeController(EmployeeFacade facade, GoogleServiceImpl service) {
     this.facade = facade;
     this.service = service;
   }
@@ -62,7 +62,7 @@ public class EmployeeController {
   public ResponseEntity<Map<String, Object>> getEmployeesPage(
       @PageableDefault(page = 0, size = 10) Pageable pageable) {
     Map<String, Object> allEmployees = facade.getAllEmployeesPage(pageable);
-    return !allEmployees.isEmpty() ? ResponseEntity.ok().body(allEmployees)
+    return Objects.nonNull(allEmployees) ? ResponseEntity.ok().body(allEmployees)
         : ResponseEntity.notFound().build();
   }
 
