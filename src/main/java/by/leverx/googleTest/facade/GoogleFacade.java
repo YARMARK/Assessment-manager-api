@@ -1,24 +1,23 @@
 package by.leverx.googleTest.facade;
 
-import by.leverx.googleTest.exception.FolderNotFoundException;
-import by.leverx.googleTest.exception.SomethingWentWrongException;
-import by.leverx.googleTest.exception.SuchFolderAlreadyExist;
-import by.leverx.googleTest.exception.SuchEmployeeAlreadyExist;
 import by.leverx.googleTest.repository.EmployeeInfoRepository;
-import by.leverx.googleTest.service.GoogleService;
+import by.leverx.googleTest.service.GoogleServiceImpl;
 import by.leverx.googleTest.service.EmployeeInfoServiceImpl;
-import by.leverx.googleTest.employee.EmployeeInfo;
-import by.leverx.googleTest.employee.dto.EmployeeInfoCreationDto;
-import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import by.leverx.googleTest.util.GoogleUtil;
-import java.util.Objects;
+import com.google.api.services.drive.Drive.Files;
+import com.google.api.services.drive.model.File;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
 public class GoogleFacade {
 
-  private GoogleService service;
+  private GoogleServiceImpl service;
 
   private GoogleUtil util;
 
@@ -27,13 +26,17 @@ public class GoogleFacade {
   private EmployeeInfoRepository repository;
 
   @Autowired
-  public GoogleFacade(GoogleService service, GoogleUtil util, EmployeeInfoRepository repository,
+  public GoogleFacade(GoogleServiceImpl service, GoogleUtil util, EmployeeInfoRepository repository,
       EmployeeInfoServiceImpl employeeService) {
 
     this.service = service;
     this.util = util;
     this.repository = repository;
     this.employeeService = employeeService;
+  }
+
+  public List<File> getAllFolders() throws GeneralSecurityException, IOException {
+    return service.getPaginationFolderList();
   }
 
 //  public String processEmployeeInfo(EmployeeInfoCreationDto dto) throws Exception {
