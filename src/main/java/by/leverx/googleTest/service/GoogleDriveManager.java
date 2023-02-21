@@ -32,7 +32,16 @@ public class GoogleDriveManager {
       Collections.singletonList(DriveScopes.DRIVE);
   private static final String CREDENTIALS_FILE_PATH = "/googleTestCred.json";
 
-  public Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
+
+  public Drive getService() throws GeneralSecurityException, IOException {
+    final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+    Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+        .setApplicationName(APPLICATION_NAME)
+        .build();
+    return service;
+  }
+
+  private Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
       throws IOException {
     InputStream in = GoogleDriveManager.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
     if (in == null) {
@@ -48,12 +57,5 @@ public class GoogleDriveManager {
     LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
     Credential credential = new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     return credential;
-  }
-  public Drive getService() throws GeneralSecurityException, IOException {
-    final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-    Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-        .setApplicationName(APPLICATION_NAME)
-        .build();
-    return service;
   }
 }
