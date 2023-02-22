@@ -48,11 +48,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   @Override
   public List<EmployeeInfoDto> getAllEmployees() {
     List<EmployeeInfo> allEmployees = repository.findAll();
-    List<EmployeeInfoDto> returnList = new ArrayList<>();
-    for (EmployeeInfo info : allEmployees) {
-      returnList.add(mappingUtil.mapToDto(info));
-    }
-    return returnList;
+    return mappingUtil.mapListToDto(allEmployees);
   }
 
   @Override
@@ -100,6 +96,13 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
       returnList.add(mappingUtil.mapToDto(infoDto));
     }
     return returnList;
+  }
+
+  @Override
+  public List<EmployeeInfoDto> needAssessmentList() {
+    List<EmployeeInfoDto> needAssessment = mappingUtil.mapListToDto(
+        repository.findByNeedAssessment(true));
+    return util.sortByAssessmentDate(needAssessment);
   }
 
   @Override

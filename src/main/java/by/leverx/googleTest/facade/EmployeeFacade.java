@@ -38,6 +38,10 @@ public class EmployeeFacade {
     return employeeInfoService.getAllEmployees();
   }
 
+  public List<EmployeeInfoDto> geTAssessmentEmployees() {
+    return employeeInfoService.needAssessmentList();
+  }
+
   public Map<String,Object> getAllEmployeesPage(Pageable pageable){
     return employeeInfoService.getAllEmployeesPage(pageable);
   }

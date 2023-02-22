@@ -16,9 +16,12 @@ public interface EmployeeInfoService {
 
   EmployeeInfoDto saveEmployeeByInfoAndFolderId(EmployeeInfoCreationDto creationDto);
 
-  List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfoCreationDto> employeeInfoListFromJira);
+  List<EmployeeInfoDto> saveAllEmployeesInfo(
+      List<EmployeeInfoCreationDto> employeeInfoListFromJira);
 
-  List<EmployeeInfoDto> updateAssessmentDate( List<EmployeeInfoDto> employeesList);
+  List<EmployeeInfoDto> updateAssessmentDate(List<EmployeeInfoDto> employeesList);
+
+  List<EmployeeInfoDto> needAssessmentList();
 
   void deleteEmployeeByFirstAndLastName(String firstName, String lastName);
 

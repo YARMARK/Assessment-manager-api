@@ -38,6 +38,14 @@ public class EmployeeMappingUtil {
     return this.mapper.map(info, EmployeeInfoDto.class);
   }
 
+  public List<EmployeeInfoDto> mapListToDto(List<EmployeeInfo> employeeInfos){
+    List<EmployeeInfoDto> returnList = new ArrayList<>();
+    for (EmployeeInfo info : employeeInfos){
+      returnList.add(mapToDto(info));
+    }
+    return returnList;
+  }
+
   public List<EmployeeInfoCreationDto> mapToInfo(String input) throws JsonProcessingException {
     List<EmployeeInfoMapping> employeeInfoMappings = objectMapper.readValue(input,
         new TypeReference<List<EmployeeInfoMapping>>() {

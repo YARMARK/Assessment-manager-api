@@ -6,6 +6,8 @@ import by.leverx.googleTest.employee.dto.EmployeeInfoDto;
 import by.leverx.googleTest.repository.EmployeeInfoRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +67,10 @@ public class EmployeeUtil {
       returnList.add(employeeInfo);
     }
     return returnList;
+  }
+
+  public List<EmployeeInfoDto> sortByAssessmentDate(List<EmployeeInfoDto> employeeList){
+    Collections.sort(employeeList, Comparator.comparing(EmployeeInfoDto::getPreviousAssessmentDate));
+    return employeeList;
   }
 }

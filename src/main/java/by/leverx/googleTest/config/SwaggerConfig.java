@@ -19,6 +19,8 @@ public class SwaggerConfig {
 
   public static final String EMPLOYEE_TAG = "Employee Controller";
 
+  public static final String GOOGLE_TAG = "Google Controller";
+
   public static final String PROJECT_TITLE = "Assessment manager api";
 
   public static final String PROJECT_DESCRIPTION =
@@ -37,7 +39,8 @@ public class SwaggerConfig {
         .paths(Predicates.not(PathSelectors.regex("/error.*")))
         .build()
         .tags(new Tag(EMPLOYEE_TAG, "set of endpoints for Creating, Retrieving," +
-            " and Deleting employees."))
+            " and Deleting employees."),
+            new Tag(GOOGLE_TAG,"set endpoints to manage file in google drive."))
         .apiInfo(getApiInfo());
   }
 

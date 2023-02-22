@@ -1,7 +1,10 @@
 package by.leverx.googleTest.controller;
 
+import by.leverx.googleTest.config.SwaggerConfig;
 import by.leverx.googleTest.facade.GoogleFacade;
 import com.google.api.services.drive.model.File;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
+@Api(tags = {SwaggerConfig.GOOGLE_TAG})
 public class GoogleController {
 
   private GoogleFacade facade;
@@ -44,6 +48,7 @@ public class GoogleController {
 //  }
 
   @GetMapping("/getFolders")
+  @ApiOperation("returns all folder names from google drive.")
   public ResponseEntity<List<File>> getAllFolders()
       throws GeneralSecurityException, IOException {
     List<File> allFolders = facade.getAllFolders();

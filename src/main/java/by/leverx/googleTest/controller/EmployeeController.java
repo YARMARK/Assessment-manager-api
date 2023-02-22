@@ -57,6 +57,14 @@ public class EmployeeController {
         : ResponseEntity.notFound().build();
   }
 
+  @GetMapping("/employeesAssessment")
+  @ApiOperation("returns list of all employees.")
+  public ResponseEntity<List<EmployeeInfoDto>> getNeedAssessmentEmployees() {
+    List<EmployeeInfoDto> allEmployees = facade.geTAssessmentEmployees();
+    return !allEmployees.isEmpty() ? ResponseEntity.ok().body(allEmployees)
+        : ResponseEntity.notFound().build();
+  }
+
   @GetMapping("/employeesPage")
   @ApiOperation("returns pagination list of all employees.")
   public ResponseEntity<Map<String, Object>> getEmployeesPage(
