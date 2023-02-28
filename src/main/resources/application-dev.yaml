@@ -30,6 +30,11 @@ jira:
     url: ${JIRA_TEST_URL}
     user-name: ${JIRA_TEST_USERNAME}
     password: ${JIRA_TEST_PASSWORD}
+drive:
+  env:
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
+    base-url: ${BASE_URL}
 templates:
   env:
     folder: ${TEMPLATES_FOLDER}
