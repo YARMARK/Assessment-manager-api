@@ -51,6 +51,14 @@ public class EmployeeInfoDto {
       dataType = "LocalDate", example = "08-11-2023")
   private LocalDate previousAssessmentDate;
 
+
+  @JsonSerialize(using = LocalDateSerializer.class)
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+  @ApiModelProperty(value = "Next assessment date", name = "nextAssessmentDate",
+      dataType = "LocalDate", example = "08-11-2023")
+  private LocalDate nextAssessmentDate;
+
   @ApiModelProperty(value = "Need Assessment", name = "needAssessment", dataType = "Boolean",
       example = "false")
   private Boolean needAssessment;

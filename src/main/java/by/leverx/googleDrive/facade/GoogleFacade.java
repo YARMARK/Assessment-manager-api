@@ -3,7 +3,6 @@ package by.leverx.googleDrive.facade;
 import by.leverx.googleDrive.clientRest.GoogleRestClient;
 import by.leverx.googleDrive.service.EmployeeInfoService;
 import by.leverx.googleDrive.service.GoogleService;
-import by.leverx.googleDrive.service.serviceImpl.EmployeeInfoServiceImpl;
 import com.google.api.services.drive.model.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -32,7 +31,7 @@ public class GoogleFacade {
     return service.getPaginationFolderList();
   }
 
-  public String getFiles(String token) throws GeneralSecurityException, IOException {
+  public String getFiles(String token) {
     String result = restClient.performRequest(token);
     return result;
   }

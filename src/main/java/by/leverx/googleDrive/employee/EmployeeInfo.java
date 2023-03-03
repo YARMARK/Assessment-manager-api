@@ -47,6 +47,9 @@ public class EmployeeInfo implements Serializable {
   @Column(name = "previous_assessment_date")
   private LocalDate previousAssessmentDate;
 
+  @Column(name = "next_assessment_date")
+  private LocalDate nextAssessmentDate;
+
   @Column(name = "need_assessment")
   private Boolean needAssessment;
 }

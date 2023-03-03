@@ -3,6 +3,7 @@ package by.leverx.googleDrive.exception.handler;
 import static java.lang.String.format;
 
 import by.leverx.googleDrive.exception.EmployeeNotFoundException;
+import by.leverx.googleDrive.exception.NoAuthOrNoPermissionException;
 import by.leverx.googleDrive.exception.SomethingWentWrongException;
 import by.leverx.googleDrive.exception.SuchEmployeeAlreadyExist;
 import by.leverx.googleDrive.exception.SuchFolderAlreadyExist;
@@ -27,7 +28,7 @@ public class GlobalExceptionHandler {
   public @ResponseBody ErrorResponse handleGoogleJsonResponseException(
       GoogleJsonResponseException ex) {
     return new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
-        format(GJRE_MESSAGE + ex.getDetails()));
+        format(GJRE_MESSAGE, ex.getDetails()));
   }
 
   @ExceptionHandler(SuchEmployeeAlreadyExist.class)
@@ -69,6 +70,13 @@ public class GlobalExceptionHandler {
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public @ResponseBody ErrorResponse handleEmployeeNotFound(EmployeeNotFoundException ex) {
     return new ErrorResponse(HttpStatus.NOT_FOUND.value(),
+        ex.getMessage());
+  }
+
+  @ExceptionHandler(NoAuthOrNoPermissionException.class)
+  @ResponseStatus(HttpStatus.FORBIDDEN)
+  public @ResponseBody ErrorResponse handleNoAuthOrPermission(NoAuthOrNoPermissionException ex) {
+    return new ErrorResponse(HttpStatus.FORBIDDEN.value(),
         ex.getMessage());
   }
 }

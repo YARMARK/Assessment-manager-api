@@ -71,15 +71,14 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   @Override
   public EmployeeInfoDto saveEmployeeByInfoAndFolderId(
       EmployeeInfoCreationDto creationDto) {
-    if (!checkValidEmployee(creationDto)) {
+    if (!checkIsEmployeeExist(creationDto)) {
       EmployeeInfo employeeInfoWithoutDates = mappingUtil.mapToEmployee(creationDto);
       EmployeeInfo employeeInfoWithDates = setIncomeAndAssessmentDates(
           employeeInfoWithoutDates);
-//    employeeInfoWithDates = setFolderUrl(employeeInfoWithDates, folderId);
       EmployeeInfo save = repository.save(employeeInfoWithDates);
       return mappingUtil.mapToDto(save);
     } else {
-      throw new SuchEmployeeAlreadyExist(creationDto.getFirstName(),creationDto.getLastName());
+      throw new SuchEmployeeAlreadyExist(creationDto.getFirstName(), creationDto.getLastName());
     }
   }
 
@@ -88,7 +87,8 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   public List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfoCreationDto> input) {
     List<EmployeeInfoDto> employeeInfoDtoList = new ArrayList<>();
     for (EmployeeInfoCreationDto employeeInfo : input) {
-      if (!checkValidEmployee(employeeInfo)) {
+      Boolean isEmployeeExist = checkIsEmployeeExist(employeeInfo);
+      if (!isEmployeeExist) {
         EmployeeInfoDto employeeInfoDto = saveEmployeeByInfoAndFolderId(employeeInfo);
         employeeInfoDtoList.add(employeeInfoDto);
       }
@@ -141,14 +141,16 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   }
 
   @Override
-  public Boolean checkValidEmployee(EmployeeInfoCreationDto creationDto) {
+  public Boolean checkIsEmployeeExist(EmployeeInfoCreationDto creationDto) {
     EmployeeInfo byFirstNameAndLastName = repository.findByFirstNameAndLastName(
         creationDto.getFirstName(), creationDto.getLastName());
+    Boolean validMarker = true;
     if (isNull(byFirstNameAndLastName)) {
-      return false;
+      validMarker = false;
     } else {
-      return true;
+      validMarker = true;
     }
+    return validMarker;
   }
 
   @Override

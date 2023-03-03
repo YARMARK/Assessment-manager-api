@@ -12,8 +12,10 @@ public class EmployeeUtil {
 
   public static EmployeeInfo setIncomeAndAssessmentDates(EmployeeInfo employeeInfo) {
     LocalDate dateOfIncoming = LocalDate.now();
+    LocalDate nextAssessment = dateOfIncoming.plusYears(1);
     employeeInfo.setDateOfIncoming(dateOfIncoming);
     employeeInfo.setPreviousAssessmentDate(dateOfIncoming);
+    employeeInfo.setNextAssessmentDate(nextAssessment);
     return employeeInfo;
   }
 

@@ -30,7 +30,7 @@ public interface EmployeeInfoService {
 
   void deleteAllEmployees();
 
-  public Boolean checkValidEmployee(EmployeeInfoCreationDto creationDto);
+  public Boolean checkIsEmployeeExist(EmployeeInfoCreationDto creationDto);
 
   public List<EmployeeInfo> updateAssessmentMarker(List<EmployeeInfoDto> employeesList);
 }

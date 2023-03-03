@@ -33,7 +33,7 @@ public class GoogleServiceImpl implements GoogleService {
   @Value("${templates.env.folder}")
   private String FOLDER_NAME;
 
-  private final String ERROR_MESSAGE = "UNABLE TO CREAT FOLDER OR UPLOAD FILE";
+  private static final String ERROR_MESSAGE = "UNABLE TO CREAT FOLDER OR UPLOAD FILE";
 
   @Autowired
   public GoogleServiceImpl(GoogleDriveManager manager) {

@@ -24,6 +24,7 @@ public class JiraRestConfig {
     ClientHttpRequestInterceptor interceptor = new BasicAuthenticationInterceptor(JIRA_USERNAME,
         JIRA_PASSWORD);
     List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+    interceptors.add(interceptor);
     restTemplate.setInterceptors(interceptors);
     return restTemplate;
   }
