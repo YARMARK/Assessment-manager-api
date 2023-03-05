@@ -1,4 +1,4 @@
-package by.leverx.googleDrive.service.serviceImpl;
+package by.leverx.googleDrive.service.manager;
 
 import static java.lang.String.format;
 
@@ -43,7 +43,6 @@ public class GoogleDriveManager {
         .setApplicationName(APPLICATION_NAME)
         .build();
     return service;
-
   }
 
   private Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)

@@ -1,11 +1,14 @@
 package by.leverx.googleDrive.service.serviceImpl;
 
 import static by.leverx.googleDrive.util.GoogleUtil.creatCurrentMonthFolderName;
+import static java.util.Objects.*;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 import by.leverx.googleDrive.exception.SomethingWentWrongException;
 import by.leverx.googleDrive.service.GoogleService;
+import by.leverx.googleDrive.service.manager.GoogleDriveManager;
+import by.leverx.googleDrive.service.manager.ServiceDriveManger;
 import com.google.api.client.http.FileContent;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
@@ -18,6 +21,7 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -30,14 +34,17 @@ public class GoogleServiceImpl implements GoogleService {
 
   private GoogleDriveManager manager;
 
+  private ServiceDriveManger driveManger;
+
   @Value("${templates.env.folder}")
   private String FOLDER_NAME;
 
   private static final String ERROR_MESSAGE = "UNABLE TO CREAT FOLDER OR UPLOAD FILE";
 
   @Autowired
-  public GoogleServiceImpl(GoogleDriveManager manager) {
+  public GoogleServiceImpl(GoogleDriveManager manager, ServiceDriveManger driveManger) {
     this.manager = manager;
+    this.driveManger = driveManger;
   }
 
   @Override
@@ -46,7 +53,20 @@ public class GoogleServiceImpl implements GoogleService {
     var fileMetaData = new File();
     fileMetaData.setName(folderName)
         .setMimeType("application/vnd.google-apps.folder");
-    File file = manager.getService().files().create(fileMetaData)
+    File file = driveManger.getDriveService().files().create(fileMetaData)
+        .setFields("id")
+        .execute();
+    return file.getId();
+  }
+
+  @Override
+  public String createFolderByNameAndParentId(String folderName, String parentId)
+      throws Exception {
+    var fileMetaData = new File();
+    fileMetaData.setName(folderName)
+        .setMimeType("application/vnd.google-apps.folder")
+        .setParents(Collections.singletonList(parentId));
+    File file = driveManger.getDriveService().files().create(fileMetaData)
         .setFields("id")
         .execute();
     return file.getId();
@@ -186,9 +206,12 @@ public class GoogleServiceImpl implements GoogleService {
   @Order(1)
   public void checkCurrentMontFolder() throws Exception {
     String currentMonthFolderName = creatCurrentMonthFolderName();
-    String folderId = searchFolderByFolderName(currentMonthFolderName);
-    if (isNull(folderId)) {
-      createFolderByName(currentMonthFolderName);
+    String parentFolderId = searchFolderByFolderName("Assessments");
+    if (nonNull(parentFolderId)) {
+      String folderId = searchFolderByFolderNameAndParentId(currentMonthFolderName,parentFolderId);
+      if (isNull(folderId)) {
+        createFolderByNameAndParentId(currentMonthFolderName,parentFolderId);
+      }
     }
   }
 
@@ -207,12 +230,39 @@ public class GoogleServiceImpl implements GoogleService {
       queryType = " mimeType = 'application/vnd.google-apps.folder'";
       queryName = "name = '" + folderName + "'";
     }
-    result = manager.getService().files().list().setQ(queryType).setQ(queryName)
+    result = driveManger.getDriveService().files().list().setQ(queryType).setQ(queryName)
         .setSpaces("drive")
         .setFields("nextPageToken, files(id, name)")
         .execute();
     for (var file : result.getFiles()) {
       folderId = file.getId();
+    }
+    return folderId;
+  }
+
+  @Override
+  public String searchFolderByFolderNameAndParentId(String folderName, String parentId)
+      throws Exception {
+    String folderId = null;
+    String pageToken = null;
+    FileList result = null;
+    String queryType = null;
+    String queryName = null;
+
+    if (folderName.isBlank()) {
+      System.err.println("Error");
+    } else {
+      queryType = " mimeType = 'application/vnd.google-apps.folder'";
+      queryName = "name = '" + folderName + "' and '" + parentId + "' in parents";
+    }
+    result = driveManger.getDriveService().files().list().setQ(queryType).setQ(queryName)
+        .setSpaces("drive")
+        .setFields("nextPageToken, files(id, name)")
+        .execute();
+    for (var file : result.getFiles()) {
+      String webViewLink = file.getWebViewLink();
+      folderId = file.getId();
+      System.out.println(webViewLink);
     }
     return folderId;
   }

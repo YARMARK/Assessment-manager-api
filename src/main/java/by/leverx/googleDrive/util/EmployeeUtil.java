@@ -27,11 +27,13 @@ public class EmployeeUtil {
 
   public static List<EmployeeInfoDto> checkAssessmentDate(
       List<EmployeeInfoDto> employeeInfoDtoList) {
-    LocalDate assessmentDeadline = LocalDate.now().minusYears(1);
+    LocalDate currentDate = LocalDate.now();
     List<EmployeeInfoDto> returnList = new ArrayList<>();
     for (EmployeeInfoDto employeeInfo : employeeInfoDtoList) {
-      if (employeeInfo.getPreviousAssessmentDate().isEqual(assessmentDeadline)) {
+      if (employeeInfo.getNextAssessmentDate().isEqual(currentDate)) {
         employeeInfo.setNeedAssessment(true);
+        LocalDate nextAssessment = currentDate.plusYears(1);
+        employeeInfo.setNextAssessmentDate(nextAssessment);
         returnList.add(employeeInfo);
       }
     }

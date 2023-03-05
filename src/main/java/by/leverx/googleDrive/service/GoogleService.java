@@ -32,6 +32,11 @@ public interface GoogleService {
 
   void checkCurrentMontFolder() throws Exception;
 
+  public String createFolderByNameAndParentId(String folderName, String parentId) throws Exception;
+
   String searchFolderByFolderName(String folderName) throws Exception;
+
+  public String searchFolderByFolderNameAndParentId(String folderName, String parentId)
+      throws Exception;
 
 }
