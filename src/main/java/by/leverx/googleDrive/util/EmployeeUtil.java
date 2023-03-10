@@ -10,6 +10,11 @@ import java.util.List;
 
 public class EmployeeUtil {
 
+  private static final String URL_PREFIX = "https://drive.google.com/drive/folders/";
+
+  private static final String URL_POSTFIX = "?usp=share_link";
+
+
   public static EmployeeInfo setIncomeAndAssessmentDates(EmployeeInfo employeeInfo) {
     LocalDate dateOfIncoming = LocalDate.now();
     LocalDate nextAssessment = dateOfIncoming.plusYears(1);
@@ -20,8 +25,14 @@ public class EmployeeUtil {
   }
 
   public static EmployeeInfo setFolderUrl(EmployeeInfo info, String folderId) {
-    String urlTemplates = "https://drive.google.com/drive/folders/" + folderId + "?usp=share_link";
+    String urlTemplates = URL_PREFIX + folderId + URL_POSTFIX;
     info.setLastAssessmentFolder(urlTemplates);
+    return info;
+  }
+
+  public static EmployeeInfo changeAssessmentFlag(EmployeeInfo info){
+    Boolean assessmentFlag = false;
+    info.setNeedAssessment(assessmentFlag);
     return info;
   }
 

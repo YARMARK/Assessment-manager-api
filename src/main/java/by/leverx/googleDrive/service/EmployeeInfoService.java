@@ -24,13 +24,17 @@ public interface EmployeeInfoService {
 
   List<EmployeeInfoDto> needAssessmentList();
 
+  EmployeeInfoDto changeAssessmentFlagAndAddFolderUrl(Long id, String folderId);
+
   void deleteEmployeeByFirstAndLastName(String firstName, String lastName);
 
   void deleteEmployeeById(Long id);
 
   void deleteAllEmployees();
 
-  public Boolean checkIsEmployeeExist(EmployeeInfoCreationDto creationDto);
+  public Boolean checkIsEmployeeExistByName(EmployeeInfoCreationDto creationDto);
+
+  public String checkIsEmployeeExistAndGetFolderName(Long id);
 
   public List<EmployeeInfo> updateAssessmentMarker(List<EmployeeInfoDto> employeesList);
 }

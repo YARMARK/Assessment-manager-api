@@ -1,7 +1,6 @@
 package by.leverx.googleDrive.service.serviceImpl;
 
 import static by.leverx.googleDrive.util.GoogleUtil.creatCurrentMonthFolderName;
-import static java.util.Objects.*;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
@@ -21,7 +20,6 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -39,7 +37,7 @@ public class GoogleServiceImpl implements GoogleService {
   @Value("${templates.env.folder}")
   private String FOLDER_NAME;
 
-  private static final String ERROR_MESSAGE = "UNABLE TO CREAT FOLDER OR UPLOAD FILE";
+  private static final String ERROR_MESSAGE = "Unable to create folder or upload file";
 
   @Autowired
   public GoogleServiceImpl(GoogleDriveManager manager, ServiceDriveManger driveManger) {
@@ -140,10 +138,9 @@ public class GoogleServiceImpl implements GoogleService {
   public List<java.io.File> getListOfFiles(String folderName) throws URISyntaxException {
     var folder = new java.io.File(getFolderPath(folderName));
     java.io.File[] listOfFiles = folder.listFiles();
-    String regex = "[A-Za-z\\d]{1,50}.xlsx";
     List<java.io.File> returnList = new ArrayList<>();
     for (java.io.File file : listOfFiles) {
-      if (file.isFile() && file.getName().matches(regex)) {
+      if (file.isFile() && file.getName().endsWith("xlsx")) {
         returnList.add(file);
       }
     }
@@ -262,7 +259,6 @@ public class GoogleServiceImpl implements GoogleService {
     for (var file : result.getFiles()) {
       String webViewLink = file.getWebViewLink();
       folderId = file.getId();
-      System.out.println(webViewLink);
     }
     return folderId;
   }

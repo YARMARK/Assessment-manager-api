@@ -1,19 +1,25 @@
 package by.leverx.googleDrive.controller;
 
+import static java.util.Objects.*;
+
 import by.leverx.googleDrive.config.SwaggerConfig;
 import by.leverx.googleDrive.facade.GoogleFacade;
 import com.google.api.services.drive.model.File;
 import com.google.auth.oauth2.AccessToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -60,14 +66,25 @@ public class GoogleController {
         ResponseEntity.ok().body(allFolders) :
         ResponseEntity.notFound().build();
   }
+
   @GetMapping("/files")
   @ApiOperation("returns all folder names from google drive.")
   public ResponseEntity<String> getFiles(
-      @RequestHeader(HttpHeaders.AUTHORIZATION) String token)
-      throws GeneralSecurityException, IOException {
+      @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
     String allFolders = facade.getFiles(token);
-    return !allFolders.isEmpty() ?
+    return nonNull(allFolders) ?
         ResponseEntity.ok().body(allFolders) :
+        ResponseEntity.notFound().build();
+  }
+
+  @PostMapping("/folder/{folderName}")
+  @ApiOperation("create folder by folder name in google drive.")
+  public ResponseEntity<String> createFolder(
+      @RequestHeader(HttpHeaders.AUTHORIZATION) String token,
+      @ApiParam("Folder name") @PathVariable("folderName") String folderName) {
+    String folderId = facade.createFolderByName(folderName, token);
+    return nonNull(folderId) ?
+        ResponseEntity.ok().body(folderId) :
         ResponseEntity.notFound().build();
   }
 }

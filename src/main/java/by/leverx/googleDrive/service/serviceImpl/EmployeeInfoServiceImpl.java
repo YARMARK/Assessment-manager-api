@@ -1,5 +1,7 @@
 package by.leverx.googleDrive.service.serviceImpl;
 
+import static by.leverx.googleDrive.util.EmployeeUtil.changeAssessmentFlag;
+import static by.leverx.googleDrive.util.EmployeeUtil.setFolderUrl;
 import static by.leverx.googleDrive.util.EmployeeUtil.setIncomeAndAssessmentDates;
 import static by.leverx.googleDrive.util.EmployeeUtil.sortByAssessmentDate;
 import static java.util.Objects.isNull;
@@ -71,7 +73,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   @Override
   public EmployeeInfoDto saveEmployeeByInfoAndFolderId(
       EmployeeInfoCreationDto creationDto) {
-    if (!checkIsEmployeeExist(creationDto)) {
+    if (!checkIsEmployeeExistByName(creationDto)) {
       EmployeeInfo employeeInfoWithoutDates = mappingUtil.mapToEmployee(creationDto);
       EmployeeInfo employeeInfoWithDates = setIncomeAndAssessmentDates(
           employeeInfoWithoutDates);
@@ -87,7 +89,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   public List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfoCreationDto> input) {
     List<EmployeeInfoDto> employeeInfoDtoList = new ArrayList<>();
     for (EmployeeInfoCreationDto employeeInfo : input) {
-      Boolean isEmployeeExist = checkIsEmployeeExist(employeeInfo);
+      Boolean isEmployeeExist = checkIsEmployeeExistByName(employeeInfo);
       if (!isEmployeeExist) {
         EmployeeInfoDto employeeInfoDto = saveEmployeeByInfoAndFolderId(employeeInfo);
         employeeInfoDtoList.add(employeeInfoDto);
@@ -112,6 +114,18 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
     List<EmployeeInfoDto> needAssessment = mappingUtil.mapListToDto(
         repository.findByNeedAssessment(true));
     return sortByAssessmentDate(needAssessment);
+  }
+
+  @Override
+  public EmployeeInfoDto changeAssessmentFlagAndAddFolderUrl(Long id, String folderId) {
+    Optional<EmployeeInfo> byId = repository.findById(id);
+    if (byId.isPresent()) {
+      EmployeeInfo employeeInfo = changeAssessmentFlag(byId.get());
+      employeeInfo = setFolderUrl(employeeInfo,folderId);
+      EmployeeInfo savedEmployee = repository.save(employeeInfo);
+      return mappingUtil.mapToDto(savedEmployee);
+    }
+    throw new EmployeeNotFoundException(id.toString());
   }
 
   @Override
@@ -140,17 +154,27 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
     repository.deleteAll();
   }
 
-  @Override
-  public Boolean checkIsEmployeeExist(EmployeeInfoCreationDto creationDto) {
+  public Boolean checkIsEmployeeExistByName(EmployeeInfoCreationDto creationDto) {
     EmployeeInfo byFirstNameAndLastName = repository.findByFirstNameAndLastName(
         creationDto.getFirstName(), creationDto.getLastName());
     Boolean validMarker = true;
     if (isNull(byFirstNameAndLastName)) {
       validMarker = false;
-    } else {
-      validMarker = true;
     }
     return validMarker;
+  }
+
+
+  @Override
+  public String checkIsEmployeeExistAndGetFolderName(Long id) {
+    Optional<EmployeeInfo> byId = repository.findById(id);
+    if (byId.isPresent()) {
+      EmployeeInfo employeeInfo = byId.get();
+      String folderName  = employeeInfo.getFirstName() + "_" +employeeInfo.getLastName();
+      return folderName;
+    }else {
+      throw new EmployeeNotFoundException(id.toString());
+    }
   }
 
   @Override

@@ -5,6 +5,7 @@ import by.leverx.googleDrive.service.EmployeeInfoService;
 import by.leverx.googleDrive.service.GoogleService;
 import com.google.api.services.drive.model.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,18 @@ public class GoogleFacade {
     return result;
   }
 
+  public String createFolderByName(String folderName, String toke){
+    return restClient.createFolder(folderName, toke);
+  }
+
+  public String searchFolderByName(String folderName, String token){
+    return restClient.searchFolderByName(folderName, token);
+  }
+
+  public List<String> uploadDocks(String folderId, String token)
+      throws URISyntaxException, IOException {
+    return restClient.uploadDocksToFolder(folderId, token);
+  }
 //  public String processEmployeeInfo(EmployeeInfoCreationDto dto) throws Exception {
 //    String folderName = dto.getFirstName() + "_" + dto.getLastName();
 //    String folderId = createFolderByFolderName(folderName);
