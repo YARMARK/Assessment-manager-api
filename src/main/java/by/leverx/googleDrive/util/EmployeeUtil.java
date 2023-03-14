@@ -1,5 +1,8 @@
 package by.leverx.googleDrive.util;
 
+import static by.leverx.googleDrive.util.ConstantMessage.getEmployeeUtilUrlPostfix;
+import static by.leverx.googleDrive.util.ConstantMessage.getEmployeeUtilUrlPrefix;
+
 import by.leverx.googleDrive.dto.EmployeeInfoDto;
 import by.leverx.googleDrive.employee.EmployeeInfo;
 import java.time.LocalDate;
@@ -9,11 +12,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class EmployeeUtil {
-
-  private static final String URL_PREFIX = "https://drive.google.com/drive/folders/";
-
-  private static final String URL_POSTFIX = "?usp=share_link";
-
 
   public static EmployeeInfo setIncomeAndAssessmentDates(EmployeeInfo employeeInfo) {
     LocalDate dateOfIncoming = LocalDate.now();
@@ -25,7 +23,7 @@ public class EmployeeUtil {
   }
 
   public static EmployeeInfo setFolderUrl(EmployeeInfo info, String folderId) {
-    String urlTemplates = URL_PREFIX + folderId + URL_POSTFIX;
+    String urlTemplates = getEmployeeUtilUrlPrefix() + folderId + getEmployeeUtilUrlPostfix();
     info.setLastAssessmentFolder(urlTemplates);
     return info;
   }

@@ -1,7 +1,12 @@
 package by.leverx.googleDrive.service.manager;
 
+import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerApplicationName;
+import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerCredentialsFilePath;
+import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerFileNotFoundMessage;
+import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerTokensDirectoryPath;
 import static java.lang.String.format;
 
+import by.leverx.googleDrive.util.ConstantMessage;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -27,35 +32,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class GoogleDriveManager {
 
-  private static final String APPLICATION_NAME = "Test Application";
   private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
-  private static final String TOKENS_DIRECTORY_PATH = "tokens";
   private static final List<String> SCOPES =
       Collections.singletonList(DriveScopes.DRIVE);
-  private static final String CREDENTIALS_FILE_PATH = "/googleTestCred.json";
-
-  private static final String FILE_NOT_FOUND_MESSAGE = "Resource not found: %s";
-
 
   public Drive getService() throws GeneralSecurityException, IOException {
     final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-    Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY,getCredentials(HTTP_TRANSPORT))
-        .setApplicationName(APPLICATION_NAME)
+    Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+        .setApplicationName(getDriveManagerApplicationName())
         .build();
     return service;
   }
 
   private Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
       throws IOException {
-    InputStream in = GoogleDriveManager.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+    InputStream in = GoogleDriveManager.class.getResourceAsStream(
+        getDriveManagerCredentialsFilePath());
     if (in == null) {
-      throw new FileNotFoundException(format(FILE_NOT_FOUND_MESSAGE + CREDENTIALS_FILE_PATH));
+      throw new FileNotFoundException(
+          format(getDriveManagerFileNotFoundMessage(), getDriveManagerCredentialsFilePath()));
     }
     GoogleClientSecrets clientSecrets =
         GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
     GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
         HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
-        .setDataStoreFactory(new FileDataStoreFactory(new File(TOKENS_DIRECTORY_PATH)))
+        .setDataStoreFactory(
+            new FileDataStoreFactory(new File(getDriveManagerTokensDirectoryPath())))
         .setAccessType("offline")
         .build();
     LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();

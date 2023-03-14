@@ -2,12 +2,12 @@ package by.leverx.googleDrive.exception;
 
 import static java.lang.String.format;
 
-public class SuchEmployeeAlreadyExist extends RuntimeException {
+import by.leverx.googleDrive.util.ConstantMessage;
 
-  public static final String MESSAGE_NAMES = "Employee: %s %s already created!";
+public class SuchEmployeeAlreadyExist extends RuntimeException {
 
   public SuchEmployeeAlreadyExist(String first, String lastName) {
 
-    super(format(MESSAGE_NAMES,first,lastName));
+    super(format(ConstantMessage.getSuchEmployeeAlreadyExistsMessageNames(),first,lastName));
   }
 }

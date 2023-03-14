@@ -1,5 +1,6 @@
 package by.leverx.googleDrive.exception.handler;
 
+import static by.leverx.googleDrive.util.ConstantMessage.*;
 import static java.lang.String.format;
 
 import by.leverx.googleDrive.exception.EmployeeNotFoundException;
@@ -7,6 +8,7 @@ import by.leverx.googleDrive.exception.NoAuthOrNoPermissionException;
 import by.leverx.googleDrive.exception.SomethingWentWrongException;
 import by.leverx.googleDrive.exception.SuchEmployeeAlreadyExist;
 import by.leverx.googleDrive.exception.SuchFolderAlreadyExist;
+import by.leverx.googleDrive.util.ConstantMessage;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -17,18 +19,17 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpClientErrorException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-  private static final String GJRE_MESSAGE = "Unable to create folder: %s";
-
   @ExceptionHandler(GoogleJsonResponseException.class)
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ResponseStatus(HttpStatus.FORBIDDEN)
   public @ResponseBody ErrorResponse handleGoogleJsonResponseException(
       GoogleJsonResponseException ex) {
-    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
-        format(GJRE_MESSAGE, ex.getDetails()));
+    return new ErrorResponse(HttpStatus.FORBIDDEN.value(),
+        format(getGlobalExceptionGjreMessage(), ex.getDetails()));
   }
 
   @ExceptionHandler(SuchEmployeeAlreadyExist.class)
@@ -44,10 +45,14 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(SomethingWentWrongException.class)
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
   public @ResponseBody ErrorResponse handleSomethingWentWrongException(
       SomethingWentWrongException ex) {
-    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    if(ex.getStatusCode() == null) {
+      return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    }
+    else {
+      return new ErrorResponse(ex.getStatusCode().value(), ex.getMessage());
+    }
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -69,14 +74,17 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(EmployeeNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public @ResponseBody ErrorResponse handleEmployeeNotFound(EmployeeNotFoundException ex) {
-    return new ErrorResponse(HttpStatus.NOT_FOUND.value(),
-        ex.getMessage());
+    return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
   }
 
   @ExceptionHandler(NoAuthOrNoPermissionException.class)
-  @ResponseStatus(HttpStatus.FORBIDDEN)
   public @ResponseBody ErrorResponse handleNoAuthOrPermission(NoAuthOrNoPermissionException ex) {
-    return new ErrorResponse(HttpStatus.FORBIDDEN.value(),
-        ex.getMessage());
+    return new ErrorResponse(HttpStatus.FORBIDDEN.value(), ex.getMessage());
   }
+
+  @ExceptionHandler(HttpClientErrorException.class)
+  public @ResponseBody ErrorResponse handleHttpClientException(HttpClientErrorException ex) {
+    return new ErrorResponse(ex.getStatusCode().value(), getGlobalExceptionHttpClientErrorMessage());
+  }
+
 }

@@ -1,5 +1,8 @@
 package by.leverx.googleDrive.config;
 
+import static by.leverx.googleDrive.util.ConstantMessage.*;
+
+import by.leverx.googleDrive.util.ConstantMessage;
 import com.google.common.base.Predicates;
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
@@ -17,36 +20,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-  public static final String EMPLOYEE_TAG = "Employee Controller";
+  public static final String SWAGGER_EMPLOYEE_TAG = "Employee Controller";
 
-  public static final String GOOGLE_TAG = "Google Controller";
+  public static final String SWAGGER_GOOGLE_TAG = "Google Controller";
 
-  private static final String PROJECT_TITLE = "Assessment manager api";
-
-  public static final String EMPLOYEE_TAG_DESCRIPTION =
+  public static String SWAGGER_EMPLOYEE_TAG_DESCRIPTION =
       "set of endpoints for Creating, Retrieving, and Deleting employees.";
 
-  public static final String GOOGLE_TAG_DESCRIPTION = "set endpoints to manage file in google drive.";
-
-  private static final String TERM_OF_SERVICE = "Term of services";
-
-  private static final String FULL_NAME = "Yaraslau Markau";
-
-  private static final String E_MAIL = "yaraslau.markau@leverx.com";
-
-  private static final String URL = "https://mail.google.com/";
-
-  private static final String LICENCE = "Apache 2.0";
-
-  private static final String LICENCE_URL = "https://www.apache.org/licenses/LICENSE-2.0.html";
-
-  public static final String PROJECT_DESCRIPTION =
-      "Application built on Spring Boot as API-provide to help admin with creating folders and putting"
-          + " predefined template files for the next assessment date and sending notifications for"
-          + " both sides of the assessment. This application has integration with Google Drive (folders"
-          + " and files), JIRA (Employees info like first and last name).";
-
-  public static final String PROJECT_VERSION = "1.0.0";
+  public static String SWAGGER_GOOGLE_TAG_DESCRIPTION = "set endpoints to manage file in google drive.";
 
   @Bean
   public Docket api() {
@@ -55,20 +36,20 @@ public class SwaggerConfig {
         .apis(RequestHandlerSelectors.any())
         .paths(Predicates.not(PathSelectors.regex("/error.*")))
         .build()
-        .tags(new Tag(EMPLOYEE_TAG, EMPLOYEE_TAG_DESCRIPTION),
-            new Tag(GOOGLE_TAG, GOOGLE_TAG_DESCRIPTION))
+        .tags(new Tag(SWAGGER_EMPLOYEE_TAG, SWAGGER_EMPLOYEE_TAG_DESCRIPTION),
+            new Tag(SWAGGER_GOOGLE_TAG, SWAGGER_GOOGLE_TAG_DESCRIPTION))
         .apiInfo(getApiInfo());
   }
 
   private ApiInfo getApiInfo() {
     return new ApiInfo(
-        PROJECT_TITLE,
-        PROJECT_DESCRIPTION,
-        PROJECT_VERSION,
-        TERM_OF_SERVICE,
-        new Contact(FULL_NAME, URL, E_MAIL),
-        LICENCE,
-        LICENCE_URL,
+        getSwaggerProjectTitle(),
+        getSwaggerProjectDescription(),
+        getSwaggerProjectVersion(),
+        getSwaggerTermOfService(),
+        new Contact(getSwaggerFullName(), getSwaggerUrl(), getSwaggerEMail()),
+        getSwaggerLicence(),
+        getSwaggerLicenceUrl(),
         Collections.emptyList());
   }
 }
