@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/employees")
-@Api(tags = {SwaggerConfig.EMPLOYEE_TAG})
+@Api(tags = {SwaggerConfig.SWAGGER_EMPLOYEE_TAG})
 public class EmployeeController {
 
   private EmployeeFacade facade;

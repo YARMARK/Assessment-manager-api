@@ -1,6 +1,5 @@
 package by.leverx.googleDrive.facade;
 
-import by.leverx.googleDrive.clientRest.GoogleRestClient;
 import by.leverx.googleDrive.service.EmployeeInfoService;
 import by.leverx.googleDrive.service.GoogleService;
 import com.google.api.services.drive.model.File;
@@ -18,14 +17,10 @@ public class GoogleFacade {
 
   private EmployeeInfoService employeeService;
 
-  private GoogleRestClient restClient;
-
   @Autowired
-  public GoogleFacade(GoogleService service, EmployeeInfoService employeeService,
-      GoogleRestClient restClient) {
+  public GoogleFacade(GoogleService service, EmployeeInfoService employeeService) {
     this.service = service;
     this.employeeService = employeeService;
-    this.restClient = restClient;
   }
 
   public List<File> getAllFolders() throws GeneralSecurityException, IOException {
@@ -33,21 +28,22 @@ public class GoogleFacade {
   }
 
   public String getFiles(String token) {
-    String result = restClient.performRequest(token);
+    String result = service.performRequest(token);
     return result;
   }
 
-  public String createFolderByName(String folderName, String toke){
-    return restClient.createFolder(folderName, toke);
+  public String createFolderByName(String folderName, String toke) {
+    return service.clientCreateFolder(folderName, toke);
   }
 
-  public String searchFolderByName(String folderName, String token){
-    return restClient.searchFolderByName(folderName, token);
+  public String searchFolderByName(String folderName, String token) {
+    String mimeType = "folder";
+    return service.searchFolderByName(folderName, token, mimeType);
   }
 
   public List<String> uploadDocks(String folderId, String token)
       throws URISyntaxException, IOException {
-    return restClient.uploadDocksToFolder(folderId, token);
+    return service.clientUploadDocksToFolder(folderId, token);
   }
 //  public String processEmployeeInfo(EmployeeInfoCreationDto dto) throws Exception {
 //    String folderName = dto.getFirstName() + "_" + dto.getLastName();

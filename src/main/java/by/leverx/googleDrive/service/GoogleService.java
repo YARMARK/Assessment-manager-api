@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import org.springframework.http.HttpHeaders;
 
 public interface GoogleService {
 
@@ -32,11 +33,20 @@ public interface GoogleService {
 
   void checkCurrentMontFolder() throws Exception;
 
-  public String createFolderByNameAndParentId(String folderName, String parentId) throws Exception;
+   String createFolderByNameAndParentId(String folderName, String parentId) throws Exception;
 
   String searchFolderByFolderName(String folderName) throws Exception;
 
-  public String searchFolderByFolderNameAndParentId(String folderName, String parentId)
+   String searchFolderByFolderNameAndParentId(String folderName, String parentId)
       throws Exception;
+
+   String performRequest(String token);
+
+  String clientCreateFolder(String folderName, String token);
+
+  String searchFolderByName(String name, String token, String type);
+
+  List<String> clientUploadDocksToFolder(String folderId, String token)
+      throws URISyntaxException;
 
 }

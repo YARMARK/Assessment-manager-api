@@ -1,6 +1,6 @@
 package by.leverx.googleDrive.controller;
 
-import static java.util.Objects.*;
+import static java.util.Objects.nonNull;
 
 import by.leverx.googleDrive.config.SwaggerConfig;
 import by.leverx.googleDrive.facade.GoogleFacade;
@@ -12,7 +12,6 @@ import io.swagger.annotations.ApiParam;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
-import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-@Api(tags = {SwaggerConfig.GOOGLE_TAG})
+@Api(tags = {SwaggerConfig.SWAGGER_GOOGLE_TAG})
 public class GoogleController {
 
   private GoogleFacade facade;

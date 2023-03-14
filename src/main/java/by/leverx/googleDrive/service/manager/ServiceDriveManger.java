@@ -1,5 +1,9 @@
 package by.leverx.googleDrive.service.manager;
 
+import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerApplicationName;
+import static by.leverx.googleDrive.util.ConstantMessage.getDriveServiceAccountFile;
+
+import by.leverx.googleDrive.util.ConstantMessage;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -16,19 +20,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceDriveManger {
 
-  private static final String APPLICATION_NAME = "Test Application";
   private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
-  private static final String SERVICE_ACCOUNT_FILE = "/googleServiceCred.json";
 
   public Drive getDriveService() throws IOException, GeneralSecurityException {
     GoogleCredentials credentials = GoogleCredentials.fromStream(
-        ServiceDriveManger.class.getResourceAsStream(SERVICE_ACCOUNT_FILE)
-    ).createScoped(Collections.singleton(DriveScopes.DRIVE));
+            ServiceDriveManger.class.getResourceAsStream(getDriveServiceAccountFile()))
+        .createScoped(Collections.singleton(DriveScopes.DRIVE));
 
     HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
     Drive driveService = new Drive.Builder(httpTransport, JSON_FACTORY,
         new HttpCredentialsAdapter(credentials))
-        .setApplicationName(APPLICATION_NAME)
+        .setApplicationName(getDriveManagerApplicationName())
         .build();
     return driveService;
   }
