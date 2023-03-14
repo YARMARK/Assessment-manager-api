@@ -1,6 +1,6 @@
 package by.leverx.googleDrive.clientRest;
 
-import static by.leverx.googleDrive.util.ConstantMessage.*;
+import static by.leverx.googleDrive.util.ConstantMessage.getUnableToCreteUploadMessage;
 import static java.util.Objects.nonNull;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -13,8 +13,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;

@@ -22,6 +22,11 @@ spring:
 server:
   error:
     include-message: always
+drive:
+  env:
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
+    base-url: ${BASE_URL}
 jira:
   env:
     url: ${JIRA_TEST_URL}
