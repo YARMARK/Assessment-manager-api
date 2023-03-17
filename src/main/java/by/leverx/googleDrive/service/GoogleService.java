@@ -31,9 +31,11 @@ public interface GoogleService {
 
   String getFolderPath(String folderName) throws URISyntaxException;
 
-  void checkCurrentMontFolder() throws Exception;
+  void checkCurrentMonthFolder() throws Exception;
 
-   String createFolderByNameAndParentId(String folderName, String parentId) throws Exception;
+  public void scheduleCreationNextMonthFolder(String folderName) throws Exception;
+
+  String createFolderByNameAndParentId(String folderName, String parentId) throws Exception;
 
   String searchFolderByFolderName(String folderName) throws Exception;
 

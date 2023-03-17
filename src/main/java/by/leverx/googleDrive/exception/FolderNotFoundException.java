@@ -4,7 +4,7 @@ import static java.lang.String.*;
 
 import by.leverx.googleDrive.util.ConstantMessage;
 
-public class FolderNotFoundException extends NullPointerException{
+public class FolderNotFoundException extends RuntimeException{
 
   public FolderNotFoundException() {
   }

@@ -33,7 +33,6 @@ public class ScheduleJobsManager {
     this.employeeService = employeeService;
     this.googleService = googleService;
   }
-
   @Scheduled(cron = "0 0 18 * * * ")
   public void updateEmployeeList() throws JsonProcessingException {
     String users = jiraService.getUsersAsString();
@@ -44,10 +43,11 @@ public class ScheduleJobsManager {
   @Scheduled(cron = "0 0 19 L * ?")
   public void createNextMonthFolder() throws Exception {
     String nextMonthFolderName = creatNextMonthFolderName();
-    String folderId = googleService.searchFolderByFolderName(nextMonthFolderName);
-    if (Objects.isNull(folderId)) {
-      googleService.createFolderByName(nextMonthFolderName);
-    }
+    googleService.scheduleCreationNextMonthFolder(nextMonthFolderName);
+//    String folderId = googleService.searchFolderByFolderName(nextMonthFolderName);
+//    if (Objects.isNull(folderId)) {
+//      googleService.createFolderByName(nextMonthFolderName);
+//    }
   }
 
   @Scheduled(cron = "0 0 19 * * * ")

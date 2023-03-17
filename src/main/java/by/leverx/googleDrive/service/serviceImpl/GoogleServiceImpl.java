@@ -65,7 +65,7 @@ public class GoogleServiceImpl implements GoogleService {
   @Override
   @EventListener(ApplicationReadyEvent.class)
   @Order(1)
-  public void checkCurrentMontFolder() throws Exception {
+  public void checkCurrentMonthFolder() throws Exception {
     String currentMonthFolderName = creatCurrentMonthFolderName();
     String parentFolderId = searchFolderByFolderName("Assessments");
     if (nonNull(parentFolderId)) {
@@ -75,7 +75,21 @@ public class GoogleServiceImpl implements GoogleService {
       }
     }
     else {
-      throw new FolderNotFoundException("Assessments");
+      System.err.println("Folder Assessments not found");
+    }
+  }
+
+  @Override
+  public void scheduleCreationNextMonthFolder(String folderName) throws Exception {
+    String parentFolderId = searchFolderByFolderName("Assessments");
+    if (nonNull(parentFolderId)) {
+      String folderId = searchFolderByFolderNameAndParentId(folderName, parentFolderId);
+      if (isNull(folderId)) {
+        createFolderByNameAndParentId(folderName, parentFolderId);
+      }
+    }
+    else {
+      System.err.println("Folder 'Assessments' not found");
     }
   }
 
