@@ -6,6 +6,7 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 import by.leverx.googleDrive.clientRest.GoogleRestClient;
+import by.leverx.googleDrive.exception.FolderNotFoundException;
 import by.leverx.googleDrive.exception.SomethingWentWrongException;
 import by.leverx.googleDrive.service.GoogleService;
 import by.leverx.googleDrive.service.manager.GoogleDriveManager;
@@ -72,6 +73,9 @@ public class GoogleServiceImpl implements GoogleService {
       if (isNull(folderId)) {
         createFolderByNameAndParentId(currentMonthFolderName, parentFolderId);
       }
+    }
+    else {
+      throw new FolderNotFoundException("Assessments");
     }
   }
 

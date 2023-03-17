@@ -34,7 +34,7 @@ public class ScheduleJobsManager {
     this.googleService = googleService;
   }
 
-  @Scheduled(cron = "1 * * * * * ")
+  @Scheduled(cron = "0 0 18 * * * ")
   public void updateEmployeeList() throws JsonProcessingException {
     String users = jiraService.getUsersAsString();
     List<EmployeeInfoCreationDto> employeeInfoCreationDto = mappingUtil.mapToInfo(users);

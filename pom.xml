@@ -25,6 +25,9 @@
     <google-oauth-client-jetty.version>1.34.1</google-oauth-client-jetty.version>
     <google-api-services-drive.version>v3-rev20220815-2.0.0</google-api-services-drive.version>
     <google-auth-library-oauth2-http.version>1.14.0</google-auth-library-oauth2-http.version>
+    <google-gmail.version>v1-rev20220404-2.0.0</google-gmail.version>
+    <jakarta.mail.version>2.0.1</jakarta.mail.version>
+    <jakarta.activation.version>2.0.1</jakarta.activation.version>
     <lombok.version>1.18.24</lombok.version>
     <h2.version>1.4.200</h2.version>
     <liquibase-core.version>4.15.0</liquibase-core.version>
@@ -35,6 +38,7 @@
     <dotenv.version>3.0.0</dotenv.version>
     <swagger2.version>2.9.2</swagger2.version>
     <swagger-ui.version>2.9.2</swagger-ui.version>
+    <JSR310.version>2.14.2</JSR310.version>
   </properties>
   <dependencies>
     <dependency>
@@ -80,6 +84,21 @@
       <groupId>com.google.auth</groupId>
       <artifactId>google-auth-library-oauth2-http</artifactId>
       <version>${google-auth-library-oauth2-http.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-gmail</artifactId>
+      <version>${google-gmail.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>jakarta.mail</artifactId>
+      <version>${jakarta.mail.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.activation</groupId>
+      <artifactId>jakarta.activation</artifactId>
+      <version>${jakarta.activation.version}</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -135,6 +154,11 @@
       <groupId>io.springfox</groupId>
       <artifactId>springfox-swagger-ui</artifactId>
       <version>${swagger-ui.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>${JSR310.version}</version>
     </dependency>
   </dependencies>
 

@@ -47,11 +47,13 @@ public class ConstantMessage {
 
   private static String DRIVE_MANAGER_TOKENS_DIRECTORY_PATH = "tokens";
 
-  private static String DRIVE_MANAGER_CREDENTIALS_FILE_PATH = "/googleTestCred.json";
+//  private static String DRIVE_MANAGER_CREDENTIALS_FILE_PATH = "/googleTestCred.json";
+
+  private static String DRIVE_MANAGER_CREDENTIALS_FILE_PATH = "/newCred.json";
 
   private static String DRIVE_MANAGER_FILE_NOT_FOUND_MESSAGE = "Resource not found: %s";
 
-  private static String DRIVE_SERVICE_ACCOUNT_FILE = "/googleServiceCred.json";
+  private static String DRIVE_SERVICE_ACCOUNT_FILE = "/googleServiceCredentials.json";
 
   private static String EMPLOYEE_UTIL_URL_PREFIX = "https://drive.google.com/drive/folders/";
 

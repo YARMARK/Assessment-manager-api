@@ -1,6 +1,7 @@
 package by.leverx.googleDrive.exception.handler;
 
-import static by.leverx.googleDrive.util.ConstantMessage.*;
+import static by.leverx.googleDrive.util.ConstantMessage.getGlobalExceptionGjreMessage;
+import static by.leverx.googleDrive.util.ConstantMessage.getGlobalExceptionHttpClientErrorMessage;
 import static java.lang.String.format;
 
 import by.leverx.googleDrive.exception.EmployeeNotFoundException;
@@ -8,7 +9,6 @@ import by.leverx.googleDrive.exception.NoAuthOrNoPermissionException;
 import by.leverx.googleDrive.exception.SomethingWentWrongException;
 import by.leverx.googleDrive.exception.SuchEmployeeAlreadyExist;
 import by.leverx.googleDrive.exception.SuchFolderAlreadyExist;
-import by.leverx.googleDrive.util.ConstantMessage;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
