@@ -23,8 +23,8 @@ public class GoogleFacade {
     this.employeeService = employeeService;
   }
 
-  public List<File> getAllFolders() throws GeneralSecurityException, IOException {
-    return service.getPaginationFolderList();
+  public List<String> getAllFolders(String token) throws GeneralSecurityException, IOException {
+    return service.getAllFolders(token);
   }
 
   public String getFiles(String token) {

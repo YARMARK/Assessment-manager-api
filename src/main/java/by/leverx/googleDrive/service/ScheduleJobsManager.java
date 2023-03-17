@@ -9,7 +9,6 @@ import by.leverx.googleDrive.dto.mapper.EmployeeInfoMapper;
 import by.leverx.googleDrive.service.serviceImpl.JiraService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.List;
-import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -44,10 +43,6 @@ public class ScheduleJobsManager {
   public void createNextMonthFolder() throws Exception {
     String nextMonthFolderName = creatNextMonthFolderName();
     googleService.scheduleCreationNextMonthFolder(nextMonthFolderName);
-//    String folderId = googleService.searchFolderByFolderName(nextMonthFolderName);
-//    if (Objects.isNull(folderId)) {
-//      googleService.createFolderByName(nextMonthFolderName);
-//    }
   }
 
   @Scheduled(cron = "0 0 19 * * * ")

@@ -6,8 +6,10 @@ import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpStatus.OK;
 
+import by.leverx.googleDrive.exception.FolderNotFoundException;
 import by.leverx.googleDrive.exception.SomethingWentWrongException;
 import com.google.api.services.drive.model.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,26 @@ public class GoogleRestClient {
     } else {
       throw new SomethingWentWrongException(exchange.getBody().toString(),
           exchange.getStatusCode());
+    }
+  }
+
+  public List<String> getAllFolder(String url, HttpEntity httpEntity) {
+    List<String> folderNames = new ArrayList<>();
+    ResponseEntity<Map> response = googleRestTemplate.exchange(url, GET, httpEntity,
+        Map.class);
+    if (response.getStatusCode() == OK) {
+      Map<String, Object> responseBody = response.getBody();
+      List<Map<String, String>> files = (List<Map<String, String>>) responseBody.get("files");
+      for (Map<String, String> file : files) {
+        String mimeType = (String) file.get("mimeType");
+        if (mimeType.equals("application/vnd.google-apps.folder")) {
+          String fileName = (String) file.get("name");
+          folderNames.add(fileName);
+        }
+      }
+      return folderNames;
+    } else {
+      throw new FolderNotFoundException();
     }
   }
 

@@ -4,9 +4,9 @@ import static by.leverx.googleDrive.util.GoogleUtil.creatCurrentMonthFolderName;
 import static by.leverx.googleDrive.util.GoogleUtil.getMimeType;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import by.leverx.googleDrive.clientRest.GoogleRestClient;
-import by.leverx.googleDrive.exception.FolderNotFoundException;
 import by.leverx.googleDrive.exception.SomethingWentWrongException;
 import by.leverx.googleDrive.service.GoogleService;
 import by.leverx.googleDrive.service.manager.GoogleDriveManager;
@@ -70,11 +70,10 @@ public class GoogleServiceImpl implements GoogleService {
     String parentFolderId = searchFolderByFolderName("Assessments");
     if (nonNull(parentFolderId)) {
       String folderId = searchFolderByFolderNameAndParentId(currentMonthFolderName, parentFolderId);
-      if (isNull(folderId)) {
+      if (isBlank(folderId)) {
         createFolderByNameAndParentId(currentMonthFolderName, parentFolderId);
       }
-    }
-    else {
+    } else {
       System.err.println("Folder Assessments not found");
     }
   }
@@ -87,8 +86,7 @@ public class GoogleServiceImpl implements GoogleService {
       if (isNull(folderId)) {
         createFolderByNameAndParentId(folderName, parentFolderId);
       }
-    }
-    else {
+    } else {
       System.err.println("Folder 'Assessments' not found");
     }
   }
@@ -192,6 +190,17 @@ public class GoogleServiceImpl implements GoogleService {
   }
 
   @Override
+  public List<String> getAllFolders(String token) {
+    HttpHeaders header = createHeader(token);
+    String mimeType = getMimeType("folder");
+    String query = "mimeType='" + mimeType + "'";
+    String url =  BASE_URL + "drive/v3/files/?q=" + query;
+    HttpEntity<FileList> httpEntity = new HttpEntity(header);
+    List<String> allFolder = restClient.getAllFolder(url, httpEntity);
+    return allFolder;
+  }
+
+  @Override
   public String clientCreateFolder(String folderName, String token) {
     File metadata = new File();
     metadata.setName(folderName)
@@ -262,21 +271,6 @@ public class GoogleServiceImpl implements GoogleService {
       fileIdList.add(uploadFile.getId());
     }
     return fileIdList;
-  }
-
-  @Override
-  public List<File> getPaginationFolderList()
-      throws GeneralSecurityException, IOException {
-    List<File> targetData = new ArrayList<>();
-    List<File> files = getAllFolders().getFiles();
-    for (var file : files) {
-      targetData.add(file);
-    }
-//    result.put("folderName", targetData);
-//    result.put("currentPage", all.getNumber());
-//    result.put("totalEmployees", all.getTotalElements());
-//    result.put("totalPages", all.getTotalPages());
-    return targetData;
   }
 
   @Override

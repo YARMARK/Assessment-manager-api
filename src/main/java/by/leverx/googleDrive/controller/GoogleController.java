@@ -57,10 +57,10 @@ public class GoogleController {
 
   @GetMapping("/getFolders")
   @ApiOperation("returns all folder names from google drive.")
-  public ResponseEntity<List<File>> getAllFolders(
-      @RequestHeader(HttpHeaders.AUTHORIZATION) AccessToken token)
+  public ResponseEntity<List<String>> getAllFolders(
+      @RequestHeader(HttpHeaders.AUTHORIZATION) String token)
       throws GeneralSecurityException, IOException {
-    List<File> allFolders = facade.getAllFolders();
+    List<String> allFolders = facade.getAllFolders(token);
     return !allFolders.isEmpty() ?
         ResponseEntity.ok().body(allFolders) :
         ResponseEntity.notFound().build();

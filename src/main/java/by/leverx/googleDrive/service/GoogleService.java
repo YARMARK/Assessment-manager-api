@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 import java.util.List;
-import org.springframework.http.HttpHeaders;
 
 public interface GoogleService {
 
@@ -17,7 +16,7 @@ public interface GoogleService {
 
   List<java.io.File> getListOfFiles(String folderName) throws URISyntaxException;
 
-  List<File> getPaginationFolderList()
+  List<String> getAllFolders(String token)
       throws GeneralSecurityException, IOException;
 
   FileList getAllFolders() throws GeneralSecurityException, IOException;
