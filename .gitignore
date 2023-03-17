@@ -35,3 +35,5 @@ build/
 /tokens/
 /src/main/resources/.env
 /src/main/resources/googleServiceCred.json
+/src/main/resources/googleServiceCredentials.json
+/src/main/resources/newCred.json
