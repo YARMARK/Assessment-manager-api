@@ -21,6 +21,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  mail:
+    username: ${USERNAME}
+    password: ${PASSWORD}
 server:
   port: 8085
   error:

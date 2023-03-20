@@ -5,6 +5,7 @@ import static java.util.Objects.nonNull;
 import by.leverx.googleDrive.config.SwaggerConfig;
 import by.leverx.googleDrive.facade.GoogleFacade;
 import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.FileList;
 import com.google.auth.oauth2.AccessToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -61,6 +62,16 @@ public class GoogleController {
       @RequestHeader(HttpHeaders.AUTHORIZATION) String token)
       throws GeneralSecurityException, IOException {
     List<String> allFolders = facade.getAllFolders(token);
+    return !allFolders.isEmpty() ?
+        ResponseEntity.ok().body(allFolders) :
+        ResponseEntity.notFound().build();
+  }
+
+  @GetMapping("/manager/getFolders")
+  @ApiOperation("returns all folder names from google drive.")
+  public ResponseEntity<FileList> getAllFoldersManager()
+      throws GeneralSecurityException, IOException {
+    FileList allFolders = facade.getAllFoldersManager();
     return !allFolders.isEmpty() ?
         ResponseEntity.ok().body(allFolders) :
         ResponseEntity.notFound().build();

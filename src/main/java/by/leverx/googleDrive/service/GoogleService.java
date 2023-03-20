@@ -19,7 +19,7 @@ public interface GoogleService {
   List<String> getAllFolders(String token)
       throws GeneralSecurityException, IOException;
 
-  FileList getAllFolders() throws GeneralSecurityException, IOException;
+  FileList getAllFoldersManager() throws GeneralSecurityException, IOException;
 
   String createFolderAndUploadFile(String folderName)
       throws Exception;

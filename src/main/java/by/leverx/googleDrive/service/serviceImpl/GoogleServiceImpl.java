@@ -274,13 +274,11 @@ public class GoogleServiceImpl implements GoogleService {
   }
 
   @Override
-  public FileList getAllFolders() throws GeneralSecurityException, IOException {
-    String folderId = null;
-    String pageToken = null;
+  public FileList getAllFoldersManager() throws GeneralSecurityException, IOException {
     FileList result = null;
 
     String query = " mimeType = 'application/vnd.google-apps.folder'";
-    result = driveManager.getService().files().list().setQ(query)
+    result = serviceDriveManger.getDriveService().files().list().setQ(query)
         .setSpaces("drive")
         .setFields("nextPageToken, files(id, name)")
         .execute();

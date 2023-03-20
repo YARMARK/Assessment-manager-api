@@ -3,6 +3,7 @@ package by.leverx.googleDrive.facade;
 import by.leverx.googleDrive.service.EmployeeInfoService;
 import by.leverx.googleDrive.service.GoogleService;
 import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.FileList;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
@@ -25,6 +26,9 @@ public class GoogleFacade {
 
   public List<String> getAllFolders(String token) throws GeneralSecurityException, IOException {
     return service.getAllFolders(token);
+  }
+  public FileList getAllFoldersManager() throws GeneralSecurityException, IOException {
+    return service.getAllFoldersManager();
   }
 
   public String getFiles(String token) {
