@@ -34,6 +34,9 @@ build/
 /src/main/resources/googleTestCred.json
 /tokens/
 /src/main/resources/.env
-/src/main/resources/googleServiceCred.json
-/src/main/resources/googleServiceCredentials.json
+/src/main/resources/credentials/googleServiceCred.json
+/src/main/resources/credentials/googleServiceCredentials.json
 /src/main/resources/newCred.json
+/src/main/resources/credentials/GmailCred.json
+/src/main/resources/credentials/DriveCred.json
+/src/main/resources/credentials/CalendarCred.json

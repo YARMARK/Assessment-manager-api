@@ -43,7 +43,8 @@ public class GoogleFacade {
 
   public List<String> uploadDocks(String folderId, String token)
       throws URISyntaxException, IOException {
-    return service.clientUploadDocksToFolder(folderId, token);
+    String fileExtension = ".xlsx";
+    return service.clientUploadDocksToFolder(folderId, token, fileExtension);
   }
 //  public String processEmployeeInfo(EmployeeInfoCreationDto dto) throws Exception {
 //    String folderName = dto.getFirstName() + "_" + dto.getLastName();

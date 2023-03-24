@@ -45,15 +45,21 @@ public class ConstantMessage {
 
   private static String DRIVE_MANAGER_APPLICATION_NAME = "Test Application";
 
-  private static String DRIVE_MANAGER_TOKENS_DIRECTORY_PATH = "tokens";
+  private static String DRIVE_MANAGER_TOKENS_DIRECTORY_PATH = "tokens/DriveTokens";
 
-//  private static String DRIVE_MANAGER_CREDENTIALS_FILE_PATH = "/googleTestCred.json";
+  private static String GMAIL_MANAGER_TOKENS_DIRECTORY_PATH = "tokens/GmailTokens";
 
-  private static String DRIVE_MANAGER_CREDENTIALS_FILE_PATH = "/newCred.json";
+  private static String CALENDAR_MANAGER_TOKENS_DIRECTORY_PATH = "tokens/CalendarTokens";
+
+  private static String DRIVE_MANAGER_CREDENTIALS_FILE = "/credentials/DriveCred.json";
+
+  private static String GMAIL_MANAGER_CREDENTIALS = "/credentials/GmailCred.json";
+
+  private static String CALENDAR_MANAGER_CREDENTIALS = "/credentials/CalendarCred.json";
 
   private static String DRIVE_MANAGER_FILE_NOT_FOUND_MESSAGE = "Resource not found: %s";
 
-  private static String DRIVE_SERVICE_ACCOUNT_FILE = "/googleServiceCredentials.json";
+  private static String DRIVE_SERVICE_ACCOUNT_CREDENTIALS = "/credentials/googleServiceCredentials.json";
 
   private static String EMPLOYEE_UTIL_URL_PREFIX = "https://drive.google.com/drive/folders/";
 
@@ -147,16 +153,32 @@ public class ConstantMessage {
     return DRIVE_MANAGER_TOKENS_DIRECTORY_PATH;
   }
 
-  public static String getDriveManagerCredentialsFilePath() {
-    return DRIVE_MANAGER_CREDENTIALS_FILE_PATH;
+  public static String getGmailManagerTokensDirectoryPath() {
+    return GMAIL_MANAGER_TOKENS_DIRECTORY_PATH;
+  }
+
+  public static String getCalendarManagerTokensDirectoryPath() {
+    return CALENDAR_MANAGER_TOKENS_DIRECTORY_PATH;
+  }
+
+  public static String getDriveManagerCredentialsFile() {
+    return DRIVE_MANAGER_CREDENTIALS_FILE;
+  }
+
+  public static String getGmailManagerCredentials() {
+    return GMAIL_MANAGER_CREDENTIALS;
+  }
+
+  public static String getCalendarManagerCredentials() {
+    return CALENDAR_MANAGER_CREDENTIALS;
   }
 
   public static String getDriveManagerFileNotFoundMessage() {
     return DRIVE_MANAGER_FILE_NOT_FOUND_MESSAGE;
   }
 
-  public static String getDriveServiceAccountFile() {
-    return DRIVE_SERVICE_ACCOUNT_FILE;
+  public static String getDriveServiceAccountCredentials() {
+    return DRIVE_SERVICE_ACCOUNT_CREDENTIALS;
   }
 
   public static String getEmployeeUtilUrlPrefix() {

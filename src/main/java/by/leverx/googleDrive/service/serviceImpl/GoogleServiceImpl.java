@@ -39,7 +39,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 @Service
-public class GoogleServiceImpl implements GoogleService {
+public class GoogleServiceImpl  implements GoogleService {
 
   private GoogleDriveManager driveManager;
 
@@ -225,10 +225,10 @@ public class GoogleServiceImpl implements GoogleService {
   }
 
   @Override
-  public List<String> clientUploadDocksToFolder(String folderId, String token)
+  public List<String> clientUploadDocksToFolder(String folderId, String token, String fileExtension)
       throws URISyntaxException {
     List<String> idList = new ArrayList<>();
-    List<java.io.File> listOfFiles = getListOfFiles(FOLDER_NAME);
+    List<java.io.File> listOfFiles = getListOfFiles(FOLDER_NAME, fileExtension);
     File metadata = new File();
     metadata.setParents(Collections.singletonList(folderId))
         .setMimeType("application/vnd.google-apps.spreadsheet");
@@ -252,9 +252,9 @@ public class GoogleServiceImpl implements GoogleService {
 
 
   @Override
-  public List<String> uploadDoc(String folderId)
+  public List<String> uploadDoc(String folderId, String fileExtension)
       throws GeneralSecurityException, IOException, URISyntaxException {
-    List<java.io.File> fileList = getListOfFiles(FOLDER_NAME);
+    List<java.io.File> fileList = getListOfFiles(FOLDER_NAME, fileExtension);
     var fileMetadata = new File();
     fileMetadata.setMimeType("application/vnd.google-apps.spreadsheet");
     fileMetadata.setParents(Collections.singletonList(folderId));
@@ -288,12 +288,12 @@ public class GoogleServiceImpl implements GoogleService {
   }
 
   @Override
-  public List<java.io.File> getListOfFiles(String folderName) throws URISyntaxException {
+  public List<java.io.File> getListOfFiles(String folderName,String fileExtension) throws URISyntaxException {
     var folder = new java.io.File(getFolderPath(folderName));
     java.io.File[] listOfFiles = folder.listFiles();
     List<java.io.File> returnList = new ArrayList<>();
     for (java.io.File file : listOfFiles) {
-      if (file.isFile() && file.getName().endsWith("xlsx")) {
+      if (file.isFile() && file.getName().endsWith(fileExtension)) {
         returnList.add(file);
       }
     }
@@ -301,10 +301,10 @@ public class GoogleServiceImpl implements GoogleService {
   }
 
   @Override
-  public String createFolderAndUploadFile(String folderName)
+  public String createFolderAndUploadFile(String folderName, String fileExtension)
       throws Exception {
     String folderId = createFolderByName(folderName);
-    List<String> fileIdList = uploadDoc(folderId);
+    List<String> fileIdList = uploadDoc(folderId, fileExtension);
     if (nonNull(folderId) && !fileIdList.isEmpty()) {
       return folderId;
     }

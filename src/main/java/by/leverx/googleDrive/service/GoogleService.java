@@ -1,6 +1,5 @@
 package by.leverx.googleDrive.service;
 
-import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -11,17 +10,17 @@ public interface GoogleService {
 
   String createFolderByName(String folderName) throws Exception;
 
-  List<String> uploadDoc(String folderId)
+  List<String> uploadDoc(String folderId, String fileExtension)
       throws GeneralSecurityException, IOException, URISyntaxException;
 
-  List<java.io.File> getListOfFiles(String folderName) throws URISyntaxException;
+  List<java.io.File> getListOfFiles(String folderName, String ends) throws URISyntaxException;
 
   List<String> getAllFolders(String token)
       throws GeneralSecurityException, IOException;
 
   FileList getAllFolders() throws GeneralSecurityException, IOException;
 
-  String createFolderAndUploadFile(String folderName)
+  String createFolderAndUploadFile(String folderName, String fileExtension)
       throws Exception;
 
   void deleteFoldrById(String folderId) throws GeneralSecurityException, IOException;
@@ -47,7 +46,7 @@ public interface GoogleService {
 
   String searchFolderByName(String name, String token, String type);
 
-  List<String> clientUploadDocksToFolder(String folderId, String token)
+  List<String> clientUploadDocksToFolder(String folderId, String token, String fileExtension)
       throws URISyntaxException;
 
 }

@@ -1,7 +1,7 @@
 package by.leverx.googleDrive.service.manager;
 
 import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerApplicationName;
-import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerCredentialsFilePath;
+import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerCredentialsFile;
 import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerFileNotFoundMessage;
 import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerTokensDirectoryPath;
 import static java.lang.String.format;
@@ -46,10 +46,10 @@ public class GoogleDriveManager {
   private Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
       throws IOException {
     InputStream in = GoogleDriveManager.class.getResourceAsStream(
-        getDriveManagerCredentialsFilePath());
+        getDriveManagerCredentialsFile());
     if (in == null) {
       throw new FileNotFoundException(
-          format(getDriveManagerFileNotFoundMessage(), getDriveManagerCredentialsFilePath()));
+          format(getDriveManagerFileNotFoundMessage(), getDriveManagerCredentialsFile()));
     }
     GoogleClientSecrets clientSecrets =
         GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));

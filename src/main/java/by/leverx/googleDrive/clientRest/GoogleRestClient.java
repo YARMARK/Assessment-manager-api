@@ -67,7 +67,7 @@ public class GoogleRestClient {
       for (Map<String, String> file : files) {
         String mimeType = (String) file.get("mimeType");
         if (mimeType.equals("application/vnd.google-apps.folder")) {
-          String fileName = (String) file.get("name");
+          String fileName = file.get("name");
           folderNames.add(fileName);
         }
       }
