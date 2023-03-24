@@ -26,6 +26,7 @@
     <google-api-services-drive.version>v3-rev20220815-2.0.0</google-api-services-drive.version>
     <google-auth-library-oauth2-http.version>1.14.0</google-auth-library-oauth2-http.version>
     <google-gmail.version>v1-rev20220404-2.0.0</google-gmail.version>
+    <google-calendar.version>v3-rev411-1.25.0</google-calendar.version>
     <jakarta.mail.version>2.0.1</jakarta.mail.version>
     <jakarta.activation.version>2.0.1</jakarta.activation.version>
     <lombok.version>1.18.24</lombok.version>
@@ -89,6 +90,11 @@
       <groupId>com.google.apis</groupId>
       <artifactId>google-api-services-gmail</artifactId>
       <version>${google-gmail.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-calendar</artifactId>
+      <version>v3-rev20220715-2.0.0</version>
     </dependency>
     <dependency>
       <groupId>com.sun.mail</groupId>
