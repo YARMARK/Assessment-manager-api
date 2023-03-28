@@ -10,7 +10,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -39,8 +38,8 @@ public class EmployeeFacade {
     return employeeInfoService.needAssessmentList();
   }
 
-  public Map<String, Object> getAllEmployeesPage(Pageable pageable) {
-    return employeeInfoService.getAllEmployeesPage(pageable);
+  public Map<String, Object> getAllEmployeesPage(int page, int size) {
+    return employeeInfoService.getAllEmployeesPage(page,size);
   }
 
   public EmployeeInfoDto saveEmployeeInfo(EmployeeInfoCreationDto creationDto) {
@@ -51,11 +50,11 @@ public class EmployeeFacade {
       throws URISyntaxException, IOException {
     String folderName = employeeInfoService.checkIsEmployeeExistAndGetFolderName(id);
     String folderId = googleFacade.searchFolderByName(folderName, token);
-    if (isNull(folderId)){
-      folderId = googleFacade.createFolderByName(folderName,token);
+    if (isNull(folderId)) {
+      folderId = googleFacade.createFolderByName(folderName, token);
     }
     googleFacade.uploadDocks(folderId, token);
-    return employeeInfoService.changeAssessmentFlagAndAddFolderUrl(id,folderId);
+    return employeeInfoService.changeAssessmentFlagAndAddFolderUrl(id, folderId);
   }
 
   public void deleteEmployeeByFirstAndLastName(String firstName, String lastName) {

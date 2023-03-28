@@ -1,6 +1,7 @@
 package by.leverx.googleDrive.facade;
 
-import by.leverx.googleDrive.service.serviceImpl.CalendarService;
+import by.leverx.googleDrive.dto.AssessmentInfoDto;
+import by.leverx.googleDrive.service.CalendarService;
 import com.google.api.services.calendar.model.Event;
 import jakarta.mail.MessagingException;
 import java.io.IOException;
@@ -23,9 +24,9 @@ public class CalendarFacade {
     this.facade = facade;
   }
 
-  public void createEvent()
+  public void createEvent(AssessmentInfoDto dto)
       throws GeneralSecurityException, IOException, MessagingException, URISyntaxException {
-    Event event = service.createEvent();
+    Event event = service.createEvent(dto);
 //    facade.sendInvite(event);
   }
 }

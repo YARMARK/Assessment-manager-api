@@ -15,8 +15,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/employees")
@@ -75,20 +74,12 @@ public class EmployeeController {
   @GetMapping("/page")
   @ApiOperation("returns pagination list of all employees.")
   public ResponseEntity<Map<String, Object>> getEmployeesPage(
-      @PageableDefault(page = 0, size = 10) Pageable pageable) {
-    Map<String, Object> allEmployees = facade.getAllEmployeesPage(pageable);
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "5") int size)
+      {
+    Map<String, Object> allEmployees = facade.getAllEmployeesPage(page,size);
     return nonNull(allEmployees) ?
         ResponseEntity.ok().body(allEmployees) :
-        ResponseEntity.notFound().build();
-  }
-
-
-  @GetMapping("/templateFiles")
-  @ApiOperation("returns list of template names to upload to google Drive.")
-  public ResponseEntity<List<String>> getFileList() throws IOException, URISyntaxException {
-    List<String> listOfFileNames = service.getListOfFileNames();
-    return !listOfFileNames.isEmpty() ?
-        ResponseEntity.ok().body(listOfFileNames) :
         ResponseEntity.notFound().build();
   }
 
@@ -101,11 +92,13 @@ public class EmployeeController {
         ResponseEntity.ok().body(employeeById) :
         ResponseEntity.notFound().build();
   }
+
   @PatchMapping("/{id}")
   @ApiOperation("change assessment need flag and add folder url.")
   public ResponseEntity<EmployeeInfoDto> changeAssessmentFlagAndAddFolderUrl(
       @RequestHeader(HttpHeaders.AUTHORIZATION) String token,
-      @ApiParam("Employee id.") @PathVariable("id") Long id) throws URISyntaxException, IOException {
+      @ApiParam("Employee id.") @PathVariable("id") Long id)
+      throws URISyntaxException, IOException {
     EmployeeInfoDto employeeInfoDto = facade.changeAssessmentFlagAndAddFolderUrl(id, token);
     return nonNull(employeeInfoDto) ?
         ResponseEntity.ok().body(employeeInfoDto) :

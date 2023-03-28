@@ -5,7 +5,6 @@ import by.leverx.googleDrive.dto.EmployeeInfoDto;
 import by.leverx.googleDrive.employee.EmployeeInfo;
 import java.util.List;
 import java.util.Map;
-import org.springframework.data.domain.Pageable;
 
 public interface EmployeeInfoService {
 
@@ -13,7 +12,7 @@ public interface EmployeeInfoService {
 
   List<EmployeeInfoDto> getAllEmployees();
 
-  Map<String, Object> getAllEmployeesPage(Pageable pageable);
+  Map<String, Object> getAllEmployeesPage(int page, int size);
 
   EmployeeInfoDto saveEmployeeByInfoAndFolderId(EmployeeInfoCreationDto creationDto);
 

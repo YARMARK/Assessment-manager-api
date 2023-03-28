@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-@Api(tags = {SwaggerConfig.SWAGGER_GOOGLE_TAG})
+@Api(tags = {SwaggerConfig.SWAGGER_DRIVE_TAG})
 public class GoogleController {
 
   private GoogleFacade facade;

@@ -29,12 +29,25 @@ public class SwaggerConfig {
 
   public static final String SWAGGER_EMPLOYEE_TAG = "Employee Controller";
 
-  public static final String SWAGGER_GOOGLE_TAG = "Google Controller";
+  public static final String SWAGGER_DRIVE_TAG = "Drive Controller";
+
+  public static final String SWAGGER_GMAIL_TAG = "Gmail Controller";
+
+  public static final String SWAGGER_CALENDAR_TAG = "Calendar Controller";
+
+  public static final String SWAGGER_FILE_TAG = "File Controller";
+
 
   public static final String SWAGGER_EMPLOYEE_TAG_DESCRIPTION =
       "set of endpoints for Creating, Retrieving, and Deleting employees.";
 
-  public static final String SWAGGER_GOOGLE_TAG_DESCRIPTION = "set endpoints to manage file in google drive.";
+  public static final String SWAGGER_DRIVE_TAG_DESCRIPTION = "set endpoints to manage file in google drive.";
+
+  public static final String SWAGGER_GMAIL_TAG_DESCRIPTION = "set endpoints to manage gmail functions.";
+
+  public static final String SWAGGER_CALENDAR_TAG_DESCRIPTION = "set endpoints to manage calendar function.";
+
+  public static final String SWAGGER_FILE_TAG_DESCRIPTION = "set endpoints to manage files.";
 
   @Bean
   public Docket api() {
@@ -44,7 +57,10 @@ public class SwaggerConfig {
         .paths(Predicates.not(PathSelectors.regex("/error.*")))
         .build()
         .tags(new Tag(SWAGGER_EMPLOYEE_TAG, SWAGGER_EMPLOYEE_TAG_DESCRIPTION),
-            new Tag(SWAGGER_GOOGLE_TAG, SWAGGER_GOOGLE_TAG_DESCRIPTION))
+            new Tag(SWAGGER_DRIVE_TAG, SWAGGER_DRIVE_TAG_DESCRIPTION),
+            new Tag(SWAGGER_GMAIL_TAG,SWAGGER_GMAIL_TAG_DESCRIPTION),
+            new Tag(SWAGGER_CALENDAR_TAG,SWAGGER_CALENDAR_TAG_DESCRIPTION),
+            new Tag(SWAGGER_FILE_TAG,SWAGGER_FILE_TAG_DESCRIPTION))
         .apiInfo(getApiInfo());
   }
 

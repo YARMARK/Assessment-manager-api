@@ -25,10 +25,6 @@ public interface GoogleService {
 
   void deleteFoldrById(String folderId) throws GeneralSecurityException, IOException;
 
-  List<String> getListOfFileNames() throws IOException, URISyntaxException;
-
-  String getFolderPath(String folderName) throws URISyntaxException;
-
   void checkCurrentMonthFolder() throws Exception;
 
   public void scheduleCreationNextMonthFolder(String folderName) throws Exception;

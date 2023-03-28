@@ -1,6 +1,7 @@
 package by.leverx.googleDrive.service.serviceImpl;
 
 import static by.leverx.googleDrive.util.ConstantMessage.UNABLE_TO_CRETE_UPLOAD;
+import static by.leverx.googleDrive.util.FileUtil.getFolderPath;
 import static by.leverx.googleDrive.util.GoogleUtil.creatCurrentMonthFolderName;
 import static by.leverx.googleDrive.util.GoogleUtil.getMimeType;
 import static java.util.Objects.isNull;
@@ -16,10 +17,7 @@ import com.google.api.client.http.FileContent;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -322,28 +320,4 @@ public class GoogleServiceImpl  implements GoogleService {
   public void deleteFoldrById(String folderId) throws GeneralSecurityException, IOException {
     driveManager.getService().files().delete(folderId).execute();
   }
-
-  @Override
-  public List<String> getListOfFileNames() throws IOException, URISyntaxException {
-    List<String> fileNames = new ArrayList<>();
-    String folderPath = getFolderPath(FOLDER_NAME);
-    Files.list(Paths.get(folderPath)).forEach(file -> fileNames.add(file.getFileName().toString()));
-    return fileNames;
-  }
-
-
-  @Override
-  public String getFolderPath(String folderName) throws URISyntaxException {
-    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-    if (classLoader == null) {
-      classLoader = GoogleServiceImpl.class.getClassLoader();
-    }
-    URI folderUrl = classLoader.getResource(folderName).toURI();
-    if (folderUrl == null) {
-      throw new IllegalArgumentException("Folder not found in classpath: " + folderName);
-    }
-    String folderPath = Paths.get(folderUrl).toString();
-    return folderPath;
-  }
-
 }
