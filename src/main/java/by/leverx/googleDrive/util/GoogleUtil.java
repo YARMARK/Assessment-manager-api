@@ -1,8 +1,8 @@
 package by.leverx.googleDrive.util;
 
-import static by.leverx.googleDrive.util.ConstantMessage.getGoogleUtilIllegalArgExc;
-import static by.leverx.googleDrive.util.ConstantMessage.getMimeTypeFile;
-import static by.leverx.googleDrive.util.ConstantMessage.getMimeTypeFolder;
+import static by.leverx.googleDrive.util.ConstantMessage.GOOGLE_UTIL_ILLEGAL_ARG_EXC;
+import static by.leverx.googleDrive.util.ConstantMessage.MIME_TYPE_FILE;
+import static by.leverx.googleDrive.util.ConstantMessage.MIME_TYPE_FOLDER;
 import static java.lang.String.format;
 
 import by.leverx.googleDrive.service.serviceImpl.GoogleServiceImpl;
@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleUtil {
-
-  public static String GOOGLE_UTIL_ILLEGAL_ARG_EXC = "Folder not found in classpath: %s";
 
   public static String creatCurrentMonthFolderName() {
     LocalDate currentDate = LocalDate.now();
@@ -56,7 +54,7 @@ public class GoogleUtil {
     }
     URI folderUrl = classLoader.getResource(folderName).toURI();
     if (folderUrl == null) {
-      throw new IllegalArgumentException(format(getGoogleUtilIllegalArgExc(),folderName));
+      throw new IllegalArgumentException(format(GOOGLE_UTIL_ILLEGAL_ARG_EXC,folderName));
     }
     String folderPath = Paths.get(folderUrl).toString();
     return folderPath;
@@ -65,10 +63,10 @@ public class GoogleUtil {
   public static String getMimeType(String type) {
     String mimeType = null;
     if (type.equalsIgnoreCase("folder")) {
-      mimeType = getMimeTypeFolder();
+      mimeType = MIME_TYPE_FOLDER;
 
     } else if (type.equalsIgnoreCase("file")) {
-      mimeType = getMimeTypeFile();
+      mimeType = MIME_TYPE_FILE;
     }
     return mimeType;
   }

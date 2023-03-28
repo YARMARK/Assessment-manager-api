@@ -1,9 +1,9 @@
 package by.leverx.googleDrive.service.manager;
 
-import static by.leverx.googleDrive.util.ConstantMessage.getCalendarManagerCredentials;
-import static by.leverx.googleDrive.util.ConstantMessage.getCalendarManagerTokensDirectoryPath;
-import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerApplicationName;
-import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerFileNotFoundMessage;
+import static by.leverx.googleDrive.util.ConstantMessage.CALENDAR_MANAGER_CREDENTIALS;
+import static by.leverx.googleDrive.util.ConstantMessage.CALENDAR_MANAGER_TOKENS_DIRECTORY_PATH;
+import static by.leverx.googleDrive.util.ConstantMessage.DRIVE_MANAGER_APPLICATION_NAME;
+import static by.leverx.googleDrive.util.ConstantMessage.DRIVE_MANAGER_FILE_NOT_FOUND_MESSAGE;
 import static java.lang.String.format;
 
 import com.google.api.client.auth.oauth2.Credential;
@@ -46,7 +46,7 @@ public class CalendarServiceManger {
 
     Calendar calendarService = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY,
         getCred(HTTP_TRANSPORT))
-        .setApplicationName(getDriveManagerApplicationName())
+        .setApplicationName(DRIVE_MANAGER_APPLICATION_NAME)
         .build();
     return calendarService;
   }
@@ -54,17 +54,17 @@ public class CalendarServiceManger {
   private Credential getCred(final NetHttpTransport HTTP_TRANSPORT)
       throws IOException {
     InputStream in = CalendarServiceManger.class.getResourceAsStream(
-        getCalendarManagerCredentials());
+        CALENDAR_MANAGER_CREDENTIALS);
     if (in == null) {
       throw new FileNotFoundException(
-          format(getDriveManagerFileNotFoundMessage(), getCalendarManagerCredentials()));
+          format(DRIVE_MANAGER_FILE_NOT_FOUND_MESSAGE, CALENDAR_MANAGER_CREDENTIALS));
     }
     GoogleClientSecrets clientSecrets =
         GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
     GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
         HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
         .setDataStoreFactory(
-            new FileDataStoreFactory(new File(getCalendarManagerTokensDirectoryPath())))
+            new FileDataStoreFactory(new File(CALENDAR_MANAGER_TOKENS_DIRECTORY_PATH)))
         .setAccessType("offline")
         .build();
     LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();

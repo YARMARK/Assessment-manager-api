@@ -1,8 +1,15 @@
 package by.leverx.googleDrive.config;
 
-import static by.leverx.googleDrive.util.ConstantMessage.*;
+import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_E_MAIL;
+import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_FULL_NAME;
+import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_LICENCE;
+import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_LICENCE_URL;
+import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_PROJECT_DESCRIPTION;
+import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_PROJECT_TITLE;
+import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_PROJECT_VERSION;
+import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_TERM_OF_SERVICE;
+import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_URL;
 
-import by.leverx.googleDrive.util.ConstantMessage;
 import com.google.common.base.Predicates;
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +31,10 @@ public class SwaggerConfig {
 
   public static final String SWAGGER_GOOGLE_TAG = "Google Controller";
 
-  public static String SWAGGER_EMPLOYEE_TAG_DESCRIPTION =
+  public static final String SWAGGER_EMPLOYEE_TAG_DESCRIPTION =
       "set of endpoints for Creating, Retrieving, and Deleting employees.";
 
-  public static String SWAGGER_GOOGLE_TAG_DESCRIPTION = "set endpoints to manage file in google drive.";
+  public static final String SWAGGER_GOOGLE_TAG_DESCRIPTION = "set endpoints to manage file in google drive.";
 
   @Bean
   public Docket api() {
@@ -43,13 +50,13 @@ public class SwaggerConfig {
 
   private ApiInfo getApiInfo() {
     return new ApiInfo(
-        getSwaggerProjectTitle(),
-        getSwaggerProjectDescription(),
-        getSwaggerProjectVersion(),
-        getSwaggerTermOfService(),
-        new Contact(getSwaggerFullName(), getSwaggerUrl(), getSwaggerEMail()),
-        getSwaggerLicence(),
-        getSwaggerLicenceUrl(),
+        SWAGGER_PROJECT_TITLE,
+        SWAGGER_PROJECT_DESCRIPTION,
+        SWAGGER_PROJECT_VERSION,
+        SWAGGER_TERM_OF_SERVICE,
+        new Contact(SWAGGER_FULL_NAME, SWAGGER_URL, SWAGGER_E_MAIL),
+        SWAGGER_LICENCE,
+        SWAGGER_LICENCE_URL,
         Collections.emptyList());
   }
 }

@@ -1,7 +1,7 @@
 package by.leverx.googleDrive.exception.handler;
 
-import static by.leverx.googleDrive.util.ConstantMessage.getGlobalExceptionGjreMessage;
-import static by.leverx.googleDrive.util.ConstantMessage.getGlobalExceptionHttpClientErrorMessage;
+import static by.leverx.googleDrive.util.ConstantMessage.GLOBAL_EXCEPTION_GJRE_MESSAGE;
+import static by.leverx.googleDrive.util.ConstantMessage.GLOBAL_EXCEPTION_HTTP_CLIENT_ERROR_MESSAGE;
 import static java.lang.String.format;
 
 import by.leverx.googleDrive.exception.EmployeeNotFoundException;
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
   public @ResponseBody ErrorResponse handleGoogleJsonResponseException(
       GoogleJsonResponseException ex) {
     return new ErrorResponse(HttpStatus.FORBIDDEN.value(),
-        format(getGlobalExceptionGjreMessage(), ex.getDetails()));
+        format(GLOBAL_EXCEPTION_GJRE_MESSAGE, ex.getDetails()));
   }
 
   @ExceptionHandler(SuchEmployeeAlreadyExist.class)
@@ -84,7 +84,7 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(HttpClientErrorException.class)
   public @ResponseBody ErrorResponse handleHttpClientException(HttpClientErrorException ex) {
-    return new ErrorResponse(ex.getStatusCode().value(), getGlobalExceptionHttpClientErrorMessage());
+    return new ErrorResponse(ex.getStatusCode().value(), GLOBAL_EXCEPTION_HTTP_CLIENT_ERROR_MESSAGE);
   }
 
 }

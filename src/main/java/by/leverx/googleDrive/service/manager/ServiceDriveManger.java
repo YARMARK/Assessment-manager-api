@@ -1,7 +1,7 @@
 package by.leverx.googleDrive.service.manager;
 
-import static by.leverx.googleDrive.util.ConstantMessage.getDriveManagerApplicationName;
-import static by.leverx.googleDrive.util.ConstantMessage.getDriveServiceAccountCredentials;
+import static by.leverx.googleDrive.util.ConstantMessage.DRIVE_MANAGER_APPLICATION_NAME;
+import static by.leverx.googleDrive.util.ConstantMessage.DRIVE_SERVICE_ACCOUNT_CREDENTIALS;
 
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
@@ -23,13 +23,13 @@ public class ServiceDriveManger {
 
   public Drive getDriveService() throws IOException, GeneralSecurityException {
     GoogleCredentials credentials = GoogleCredentials.fromStream(
-            ServiceDriveManger.class.getResourceAsStream(getDriveServiceAccountCredentials()))
+            ServiceDriveManger.class.getResourceAsStream(DRIVE_SERVICE_ACCOUNT_CREDENTIALS))
         .createScoped(Collections.singleton(DriveScopes.DRIVE));
 
     HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
     Drive driveService = new Drive.Builder(httpTransport, JSON_FACTORY,
         new HttpCredentialsAdapter(credentials))
-        .setApplicationName(getDriveManagerApplicationName())
+        .setApplicationName(DRIVE_MANAGER_APPLICATION_NAME)
         .build();
     return driveService;
   }

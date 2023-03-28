@@ -4,8 +4,6 @@ import static java.util.Objects.nonNull;
 
 import by.leverx.googleDrive.config.SwaggerConfig;
 import by.leverx.googleDrive.facade.GoogleFacade;
-import com.google.api.services.drive.model.File;
-import com.google.auth.oauth2.AccessToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

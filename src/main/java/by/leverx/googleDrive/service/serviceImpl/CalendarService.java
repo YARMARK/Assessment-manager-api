@@ -54,17 +54,15 @@ public class CalendarService {
 
   public EventDateTime createEventStart() {
     DateTime startDateTime = new DateTime("2023-03-25T17:30:00+03:00");
-    EventDateTime start = new EventDateTime()
-        .setDateTime(startDateTime)
-        .setTimeZone("Europe/Moscow");
+    String timeZone = "Europe/Moscow";
+    EventDateTime start = creteEventDateTime(startDateTime, timeZone);
     return start;
   }
 
   public EventDateTime createEventEnd() {
     DateTime endDateTime = new DateTime("2023-03-25T17:35:00+03:00");
-    EventDateTime end = new EventDateTime()
-        .setDateTime(endDateTime)
-        .setTimeZone("Europe/Moscow");
+    String timeZone = "Europe/Moscow";
+    EventDateTime end = creteEventDateTime(endDateTime, timeZone);
     return end;
   }
 
@@ -87,5 +85,12 @@ public class CalendarService {
         .setUseDefault(false)
         .setOverrides(Arrays.asList(reminderOverrides));
     return reminders;
+  }
+
+  public EventDateTime creteEventDateTime(DateTime dateTime, String timeZone) {
+    EventDateTime start = new EventDateTime()
+        .setDateTime(dateTime)
+        .setTimeZone(timeZone);
+    return start;
   }
 }

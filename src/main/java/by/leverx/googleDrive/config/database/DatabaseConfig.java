@@ -1,9 +1,10 @@
 package by.leverx.googleDrive.config.database;
 
-import static by.leverx.googleDrive.util.ConstantMessage.*;
+import static by.leverx.googleDrive.util.ConstantMessage.DB_CHANGELOG_PATH;
+import static by.leverx.googleDrive.util.ConstantMessage.DB_DEV_URL;
+import static by.leverx.googleDrive.util.ConstantMessage.DB_TEST_PROD_URL;
 import static java.lang.String.format;
 
-import by.leverx.googleDrive.util.ConstantMessage;
 import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +26,7 @@ public class DatabaseConfig {
   public DataSource getDataSource() {
     var dataSource = new DriverManagerDataSource();
 
-    dataSource.setUrl(format(getDbDevUrl(), properties.getDatabaseName()));
+    dataSource.setUrl(format(DB_DEV_URL, properties.getDatabaseName()));
     dataSource.setUsername(properties.getUserName());
     dataSource.setPassword(properties.getPassword());
     dataSource.setDriverClassName(properties.getDriverClassName());
@@ -38,7 +39,7 @@ public class DatabaseConfig {
   public DataSource getTestDataSource() {
     var dataSource = new DriverManagerDataSource();
 
-    dataSource.setUrl(format(getDbTestProdUrl(), properties.getHostName(), properties.getPort(),
+    dataSource.setUrl(format(DB_TEST_PROD_URL, properties.getHostName(), properties.getPort(),
         properties.getDatabaseName()));
     dataSource.setUsername(properties.getUserName());
     dataSource.setPassword(properties.getPassword());
@@ -52,7 +53,7 @@ public class DatabaseConfig {
   public DataSource getProdDataSource() {
     var dataSource = new DriverManagerDataSource();
 
-    dataSource.setUrl(format(getDbTestProdUrl(), properties.getHostName(), properties.getPort(),
+    dataSource.setUrl(format(DB_TEST_PROD_URL, properties.getHostName(), properties.getPort(),
         properties.getDatabaseName()));
     dataSource.setUsername(properties.getUserName());
     dataSource.setPassword(properties.getPassword());
@@ -66,7 +67,7 @@ public class DatabaseConfig {
   public SpringLiquibase springLiquibase() {
     SpringLiquibase liquibase = new SpringLiquibase();
     liquibase.setDataSource(getProdDataSource());
-    liquibase.setChangeLog(getDbChangelogPath());
+    liquibase.setChangeLog(DB_CHANGELOG_PATH);
     return liquibase;
   }
 }

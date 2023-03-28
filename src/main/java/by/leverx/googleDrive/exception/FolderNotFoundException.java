@@ -1,8 +1,7 @@
 package by.leverx.googleDrive.exception;
 
-import static java.lang.String.*;
-
-import by.leverx.googleDrive.util.ConstantMessage;
+import static by.leverx.googleDrive.util.ConstantMessage.FOLDER_NOT_FOUND_ERROR_MESSAGE;
+import static java.lang.String.format;
 
 public class FolderNotFoundException extends RuntimeException{
 
@@ -10,6 +9,6 @@ public class FolderNotFoundException extends RuntimeException{
   }
 
   public FolderNotFoundException(String message) {
-    super(format(ConstantMessage.getFolderNotFoundErrorMessage(),message));
+    super(format(FOLDER_NOT_FOUND_ERROR_MESSAGE,message));
   }
 }
