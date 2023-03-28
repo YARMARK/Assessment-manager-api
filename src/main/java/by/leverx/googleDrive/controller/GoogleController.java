@@ -65,7 +65,7 @@ public class GoogleController {
   }
 
   @GetMapping("/files")
-  @ApiOperation("returns all folder names from google drive.")
+  @ApiOperation("returns all file names from 'Assessments' folder.")
   public ResponseEntity<String> getFiles(
       @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
     String allFolders = facade.getFiles(token);

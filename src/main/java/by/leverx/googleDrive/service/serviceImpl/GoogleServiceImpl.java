@@ -1,5 +1,6 @@
 package by.leverx.googleDrive.service.serviceImpl;
 
+import static by.leverx.googleDrive.util.ConstantMessage.UNABLE_TO_CRETE_UPLOAD;
 import static by.leverx.googleDrive.util.GoogleUtil.creatCurrentMonthFolderName;
 import static by.leverx.googleDrive.util.GoogleUtil.getMimeType;
 import static java.util.Objects.isNull;
@@ -11,7 +12,6 @@ import by.leverx.googleDrive.exception.SomethingWentWrongException;
 import by.leverx.googleDrive.service.GoogleService;
 import by.leverx.googleDrive.service.manager.GoogleDriveManager;
 import by.leverx.googleDrive.service.manager.ServiceDriveManger;
-import by.leverx.googleDrive.util.ConstantMessage;
 import com.google.api.client.http.FileContent;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
@@ -182,11 +182,18 @@ public class GoogleServiceImpl  implements GoogleService {
 
   @Override
   public String performRequest(String token) {
-    String mainUrl = BASE_URL + "drive/v3/files";
+    String mainUrl = createAssessmentsFolderFilesUrl(token);
     HttpHeaders header = createHeader(token);
     HttpEntity httpEntity = new HttpEntity<>(header);
     String response = restClient.performRequest(mainUrl, httpEntity);
     return response;
+  }
+
+  private String createAssessmentsFolderFilesUrl(String token) {
+    String folderName = "Assessments";
+    String folderId = searchFolderByName(folderName, token, "folder");
+    String mainUrl = BASE_URL + "drive/v3/files?q='" + folderId + "'+in+parents&fields=files(id,name)";
+    return mainUrl;
   }
 
   @Override
@@ -308,7 +315,7 @@ public class GoogleServiceImpl  implements GoogleService {
     if (nonNull(folderId) && !fileIdList.isEmpty()) {
       return folderId;
     }
-    throw new SomethingWentWrongException(ConstantMessage.getUnableToCreteUploadMessage());
+    throw new SomethingWentWrongException(UNABLE_TO_CRETE_UPLOAD);
   }
 
   @Override

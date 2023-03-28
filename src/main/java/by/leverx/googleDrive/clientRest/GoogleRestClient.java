@@ -1,6 +1,6 @@
 package by.leverx.googleDrive.clientRest;
 
-import static by.leverx.googleDrive.util.ConstantMessage.getUnableToCreteUploadMessage;
+import static by.leverx.googleDrive.util.ConstantMessage.UNABLE_TO_CRETE_UPLOAD;
 import static java.util.Objects.nonNull;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -50,7 +50,7 @@ public class GoogleRestClient {
     ResponseEntity<File> exchange = googleRestTemplate.exchange(url, POST, httpEntity, File.class);
     if (exchange.getStatusCode() == OK) {
       String folderId = exchange.getBody().getId();
-      return folderId;
+        return folderId;
     } else {
       throw new SomethingWentWrongException(exchange.getBody().toString(),
           exchange.getStatusCode());
@@ -65,7 +65,7 @@ public class GoogleRestClient {
       Map<String, Object> responseBody = response.getBody();
       List<Map<String, String>> files = (List<Map<String, String>>) responseBody.get("files");
       for (Map<String, String> file : files) {
-        String mimeType = (String) file.get("mimeType");
+        String mimeType = file.get("mimeType");
         if (mimeType.equals("application/vnd.google-apps.folder")) {
           String fileName = file.get("name");
           folderNames.add(fileName);
@@ -99,7 +99,7 @@ public class GoogleRestClient {
       if (nonNull(responseEntity.getBody())) {
         return responseEntity.getBody().getId();
       } else {
-        throw new SomethingWentWrongException(getUnableToCreteUploadMessage());
+        throw new SomethingWentWrongException(UNABLE_TO_CRETE_UPLOAD);
       }
     } else {
       throw new SomethingWentWrongException(responseEntity.getBody().toString(),
