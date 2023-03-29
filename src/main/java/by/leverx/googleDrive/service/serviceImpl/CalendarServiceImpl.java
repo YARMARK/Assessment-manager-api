@@ -1,5 +1,6 @@
 package by.leverx.googleDrive.service.serviceImpl;
 
+import static by.leverx.googleDrive.util.CalendarUtil.convert;
 import static by.leverx.googleDrive.util.CalendarUtil.creteEventDateTime;
 import static java.lang.String.format;
 
@@ -63,7 +64,7 @@ public class CalendarServiceImpl implements by.leverx.googleDrive.service.Calend
   }
 
   private EventDateTime createEventTime(LocalDateTime dateTime, String timeZone) {
-    DateTime time = CalendarUtil.convert(dateTime);
+    DateTime time = convert(dateTime,timeZone);
     EventDateTime start = creteEventDateTime(time, timeZone);
     return start;
   }

@@ -2,7 +2,9 @@ package by.leverx.googleDrive.util;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.EventDateTime;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 public class CalendarUtil {
@@ -14,8 +16,8 @@ public class CalendarUtil {
     return start;
   }
 
-  public static DateTime convert(LocalDateTime localDateTime) {
-    long millis = localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli();
+  public static DateTime convert(LocalDateTime localDateTime, String timeZone) {
+    long millis = localDateTime.atZone(ZoneId.of(timeZone)).toInstant().toEpochMilli();
     return new DateTime(millis);
   }
 }
