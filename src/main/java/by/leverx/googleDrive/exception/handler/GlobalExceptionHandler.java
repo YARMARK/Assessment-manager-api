@@ -1,7 +1,7 @@
 package by.leverx.googleDrive.exception.handler;
 
-import static by.leverx.googleDrive.util.ConstantMessage.GLOBAL_EXCEPTION_GJRE_MESSAGE;
-import static by.leverx.googleDrive.util.ConstantMessage.GLOBAL_EXCEPTION_HTTP_CLIENT_ERROR_MESSAGE;
+import static by.leverx.googleDrive.util.ConstantMessage.ExceptionConstant.GLOBAL_EXCEPTION_GJRE_MESSAGE;
+import static by.leverx.googleDrive.util.ConstantMessage.ExceptionConstant.GLOBAL_EXCEPTION_HTTP_CLIENT_ERROR_MESSAGE;
 import static java.lang.String.format;
 
 import by.leverx.googleDrive.exception.EmployeeNotFoundException;

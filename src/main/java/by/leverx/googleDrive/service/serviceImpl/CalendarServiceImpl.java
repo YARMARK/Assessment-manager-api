@@ -6,7 +6,6 @@ import static java.lang.String.format;
 
 import by.leverx.googleDrive.dto.AssessmentInfoDto;
 import by.leverx.googleDrive.service.manager.CalendarServiceManger;
-import by.leverx.googleDrive.util.CalendarUtil;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Event.Reminders;

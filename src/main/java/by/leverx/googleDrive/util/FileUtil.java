@@ -29,7 +29,7 @@ public class FileUtil {
     }
     URI folderUrl = classLoader.getResource(folderName).toURI();
     if (folderUrl == null) {
-      throw new IllegalArgumentException("Folder not found in classpath: " + folderName);
+      throw new IllegalArgumentException("Folder not found in classpath: ".concat( folderName));
     }
     String folderPath = Paths.get(folderUrl).toString();
     return folderPath;

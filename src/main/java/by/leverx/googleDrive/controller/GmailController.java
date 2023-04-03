@@ -1,6 +1,7 @@
 package by.leverx.googleDrive.controller;
 
-import by.leverx.googleDrive.config.SwaggerConfig;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_GMAIL_TAG;
+
 import by.leverx.googleDrive.dto.DtoMessage;
 import by.leverx.googleDrive.facade.GmailFacade;
 import io.swagger.annotations.Api;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("email/")
-@Api(tags = {SwaggerConfig.SWAGGER_GMAIL_TAG})
+@Api(tags = {SWAGGER_GMAIL_TAG})
 public class GmailController {
 
   private GmailFacade facade;

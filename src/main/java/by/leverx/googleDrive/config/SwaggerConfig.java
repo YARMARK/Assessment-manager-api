@@ -1,14 +1,24 @@
 package by.leverx.googleDrive.config;
 
-import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_E_MAIL;
-import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_FULL_NAME;
-import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_LICENCE;
-import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_LICENCE_URL;
-import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_PROJECT_DESCRIPTION;
-import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_PROJECT_TITLE;
-import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_PROJECT_VERSION;
-import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_TERM_OF_SERVICE;
-import static by.leverx.googleDrive.util.ConstantMessage.SWAGGER_URL;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_CALENDAR_TAG;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_CALENDAR_TAG_DESCRIPTION;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_DRIVE_TAG;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_DRIVE_TAG_DESCRIPTION;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_EMPLOYEE_TAG;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_EMPLOYEE_TAG_DESCRIPTION;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_E_MAIL;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_FILE_TAG;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_FILE_TAG_DESCRIPTION;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_FULL_NAME;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_GMAIL_TAG;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_GMAIL_TAG_DESCRIPTION;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_LICENCE;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_LICENCE_URL;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_PROJECT_DESCRIPTION;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_PROJECT_TITLE;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_PROJECT_VERSION;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_TERM_OF_SERVICE;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_URL;
 
 import com.google.common.base.Predicates;
 import java.util.Collections;
@@ -27,27 +37,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-  public static final String SWAGGER_EMPLOYEE_TAG = "Employee Controller";
 
-  public static final String SWAGGER_DRIVE_TAG = "Drive Controller";
-
-  public static final String SWAGGER_GMAIL_TAG = "Gmail Controller";
-
-  public static final String SWAGGER_CALENDAR_TAG = "Calendar Controller";
-
-  public static final String SWAGGER_FILE_TAG = "File Controller";
-
-
-  public static final String SWAGGER_EMPLOYEE_TAG_DESCRIPTION =
-      "set of endpoints for Creating, Retrieving, and Deleting employees.";
-
-  public static final String SWAGGER_DRIVE_TAG_DESCRIPTION = "set endpoints to manage file in google drive.";
-
-  public static final String SWAGGER_GMAIL_TAG_DESCRIPTION = "set endpoints to manage gmail functions.";
-
-  public static final String SWAGGER_CALENDAR_TAG_DESCRIPTION = "set endpoints to manage calendar function.";
-
-  public static final String SWAGGER_FILE_TAG_DESCRIPTION = "set endpoints to manage files.";
 
   @Bean
   public Docket api() {

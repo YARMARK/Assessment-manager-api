@@ -1,6 +1,6 @@
 package by.leverx.googleDrive.service.serviceImpl;
 
-import static by.leverx.googleDrive.util.ConstantMessage.UNABLE_TO_CRETE_UPLOAD;
+import static by.leverx.googleDrive.util.ConstantMessage.ExceptionConstant.UNABLE_TO_CRETE_UPLOAD;
 import static by.leverx.googleDrive.util.FileUtil.getFolderPath;
 import static by.leverx.googleDrive.util.GoogleUtil.creatCurrentMonthFolderName;
 import static by.leverx.googleDrive.util.GoogleUtil.getMimeType;

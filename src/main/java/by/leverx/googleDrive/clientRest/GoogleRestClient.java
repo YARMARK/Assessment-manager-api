@@ -1,6 +1,6 @@
 package by.leverx.googleDrive.clientRest;
 
-import static by.leverx.googleDrive.util.ConstantMessage.UNABLE_TO_CRETE_UPLOAD;
+import static by.leverx.googleDrive.util.ConstantMessage.ExceptionConstant.UNABLE_TO_CRETE_UPLOAD;
 import static java.util.Objects.nonNull;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;

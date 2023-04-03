@@ -1,7 +1,7 @@
 package by.leverx.googleDrive.util;
 
-import static by.leverx.googleDrive.util.ConstantMessage.EMPLOYEE_UTIL_URL_POSTFIX;
-import static by.leverx.googleDrive.util.ConstantMessage.EMPLOYEE_UTIL_URL_PREFIX;
+import static by.leverx.googleDrive.util.ConstantMessage.UtilConstant.EMPLOYEE_UTIL_URL_POSTFIX;
+import static by.leverx.googleDrive.util.ConstantMessage.UtilConstant.EMPLOYEE_UTIL_URL_PREFIX;
 
 import by.leverx.googleDrive.dto.EmployeeInfoDto;
 import by.leverx.googleDrive.employee.EmployeeInfo;
@@ -23,7 +23,7 @@ public class EmployeeUtil {
   }
 
   public static EmployeeInfo setFolderUrl(EmployeeInfo info, String folderId) {
-    String urlTemplates = EMPLOYEE_UTIL_URL_PREFIX + folderId + EMPLOYEE_UTIL_URL_POSTFIX;
+    String urlTemplates = EMPLOYEE_UTIL_URL_PREFIX.concat(folderId).concat(EMPLOYEE_UTIL_URL_POSTFIX);
     info.setLastAssessmentFolder(urlTemplates);
     return info;
   }

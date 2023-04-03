@@ -1,8 +1,8 @@
 package by.leverx.googleDrive.controller;
 
-import by.leverx.googleDrive.config.SwaggerConfig;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_CALENDAR_TAG;
+
 import by.leverx.googleDrive.dto.AssessmentInfoDto;
-import by.leverx.googleDrive.dto.EmployeeInfoCreationDto;
 import by.leverx.googleDrive.facade.CalendarFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/event")
-@Api(tags = {SwaggerConfig.SWAGGER_CALENDAR_TAG})
+@Api(tags = {SWAGGER_CALENDAR_TAG})
 public class CalendarController {
 
   private CalendarFacade facade;

@@ -1,7 +1,7 @@
 package by.leverx.googleDrive.service.manager;
 
-import static by.leverx.googleDrive.util.ConstantMessage.DRIVE_MANAGER_APPLICATION_NAME;
-import static by.leverx.googleDrive.util.ConstantMessage.DRIVE_SERVICE_ACCOUNT_CREDENTIALS;
+import static by.leverx.googleDrive.util.ConstantMessage.GoogleConstants.DRIVE_MANAGER_APPLICATION_NAME;
+import static by.leverx.googleDrive.util.ConstantMessage.GoogleConstants.DRIVE_SERVICE_ACCOUNT_CREDENTIALS;
 
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;

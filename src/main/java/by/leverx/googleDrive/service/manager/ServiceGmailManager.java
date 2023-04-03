@@ -1,9 +1,9 @@
 package by.leverx.googleDrive.service.manager;
 
-import static by.leverx.googleDrive.util.ConstantMessage.DRIVE_MANAGER_APPLICATION_NAME;
-import static by.leverx.googleDrive.util.ConstantMessage.DRIVE_MANAGER_FILE_NOT_FOUND_MESSAGE;
-import static by.leverx.googleDrive.util.ConstantMessage.GMAIL_MANAGER_CREDENTIALS;
-import static by.leverx.googleDrive.util.ConstantMessage.GMAIL_MANAGER_TOKENS_DIRECTORY_PATH;
+import static by.leverx.googleDrive.util.ConstantMessage.GoogleConstants.DRIVE_MANAGER_APPLICATION_NAME;
+import static by.leverx.googleDrive.util.ConstantMessage.GoogleConstants.DRIVE_MANAGER_FILE_NOT_FOUND_MESSAGE;
+import static by.leverx.googleDrive.util.ConstantMessage.GoogleConstants.GMAIL_MANAGER_CREDENTIALS;
+import static by.leverx.googleDrive.util.ConstantMessage.GoogleConstants.GMAIL_MANAGER_TOKENS_DIRECTORY_PATH;
 import static java.lang.String.format;
 
 import com.google.api.client.auth.oauth2.Credential;

@@ -6,6 +6,4 @@ public class SuchFolderAlreadyExist extends RuntimeException {
     super(message);
   }
 
-  public SuchFolderAlreadyExist() {
-  }
 }

@@ -1,8 +1,8 @@
 package by.leverx.googleDrive.config.database;
 
-import static by.leverx.googleDrive.util.ConstantMessage.DB_CHANGELOG_PATH;
-import static by.leverx.googleDrive.util.ConstantMessage.DB_DEV_URL;
-import static by.leverx.googleDrive.util.ConstantMessage.DB_TEST_PROD_URL;
+import static by.leverx.googleDrive.util.ConstantMessage.DatabaseConstant.DB_CHANGELOG_PATH;
+import static by.leverx.googleDrive.util.ConstantMessage.DatabaseConstant.DB_DEV_URL;
+import static by.leverx.googleDrive.util.ConstantMessage.DatabaseConstant.DB_TEST_PROD_URL;
 import static java.lang.String.format;
 
 import javax.sql.DataSource;

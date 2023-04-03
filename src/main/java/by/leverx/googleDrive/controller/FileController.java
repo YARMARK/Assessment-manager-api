@@ -1,6 +1,7 @@
 package by.leverx.googleDrive.controller;
 
-import by.leverx.googleDrive.config.SwaggerConfig;
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_FILE_TAG;
+
 import by.leverx.googleDrive.facade.FileFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/files")
-@Api(tags = {SwaggerConfig.SWAGGER_FILE_TAG})
+@Api(tags = {SWAGGER_FILE_TAG})
 public class FileController {
 
   private FileFacade facade;

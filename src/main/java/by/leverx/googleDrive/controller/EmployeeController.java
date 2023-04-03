@@ -1,8 +1,8 @@
 package by.leverx.googleDrive.controller;
 
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_EMPLOYEE_TAG;
 import static java.util.Objects.nonNull;
 
-import by.leverx.googleDrive.config.SwaggerConfig;
 import by.leverx.googleDrive.dto.EmployeeInfoCreationDto;
 import by.leverx.googleDrive.dto.EmployeeInfoDto;
 import by.leverx.googleDrive.facade.EmployeeFacade;
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/employees")
-@Api(tags = {SwaggerConfig.SWAGGER_EMPLOYEE_TAG})
+@Api(tags = {SWAGGER_EMPLOYEE_TAG})
 public class EmployeeController {
 
   private EmployeeFacade facade;

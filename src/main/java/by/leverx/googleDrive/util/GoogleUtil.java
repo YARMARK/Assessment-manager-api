@@ -1,8 +1,8 @@
 package by.leverx.googleDrive.util;
 
-import static by.leverx.googleDrive.util.ConstantMessage.GOOGLE_UTIL_ILLEGAL_ARG_EXC;
-import static by.leverx.googleDrive.util.ConstantMessage.MIME_TYPE_FILE;
-import static by.leverx.googleDrive.util.ConstantMessage.MIME_TYPE_FOLDER;
+import static by.leverx.googleDrive.util.ConstantMessage.UtilConstant.GOOGLE_UTIL_ILLEGAL_ARG_EXC;
+import static by.leverx.googleDrive.util.ConstantMessage.UtilConstant.MIME_TYPE_FILE;
+import static by.leverx.googleDrive.util.ConstantMessage.UtilConstant.MIME_TYPE_FOLDER;
 import static java.lang.String.format;
 
 import by.leverx.googleDrive.service.serviceImpl.GoogleServiceImpl;

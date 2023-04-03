@@ -1,8 +1,8 @@
 package by.leverx.googleDrive.controller;
 
+import static by.leverx.googleDrive.util.ConstantMessage.SwaggerConstant.SWAGGER_DRIVE_TAG;
 import static java.util.Objects.nonNull;
 
-import by.leverx.googleDrive.config.SwaggerConfig;
 import by.leverx.googleDrive.facade.GoogleFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-@Api(tags = {SwaggerConfig.SWAGGER_DRIVE_TAG})
+@Api(tags = {SWAGGER_DRIVE_TAG})
 public class GoogleController {
 
   private GoogleFacade facade;
