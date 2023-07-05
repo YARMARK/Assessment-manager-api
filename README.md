@@ -98,8 +98,19 @@ To run this project by using cf cloud use next step:
     cf push -p target/Assessment-manager-api-0.0.1-SNAPSHOT.jar
 ```
 
-* Tap the link and use it
+* Bind service instance by using next CLI command
 
+```
+    cf bind assessment-manager-api my_db_manager
+```
+
+* Rerun the application by using next CLI command
+
+```
+    cf restage assessment-manager-api
+```
+
+* Tap the link and use it
 
 ## Issue
 
