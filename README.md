@@ -86,7 +86,7 @@ http://localhost:8085/assessment-manager-api/employees
 
 To run this project by using cf cloud use next step:
 
-* Create services with name like services ref in manifest.yml file
+* Create services with name like service ref in manifest.yml file
 
 ```
     cf create service <Service name><Service plan><Instance name>
@@ -101,7 +101,7 @@ To run this project by using cf cloud use next step:
 * Bind service instance by using next CLI command
 
 ```
-    cf bind assessment-manager-api my_db_manager
+    cf bind assessment-manager-api <Instance name>
 ```
 
 * Rerun the application by using next CLI command
