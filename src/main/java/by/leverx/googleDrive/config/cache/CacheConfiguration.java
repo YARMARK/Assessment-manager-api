@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.connection.RedisPassword;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 
@@ -31,6 +34,28 @@ public class CacheConfiguration {
                 .entryTtl(Duration.ofMinutes(5))
                 .serializeValuesWith(SerializationPair.fromSerializer(
                     new GenericJackson2JsonRedisSerializer(redisObjectMapper()))));
+  }
+
+  @Profile(value = "prod")
+  @Bean
+  public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizerProd() {
+    return (builder) -> builder
+        .fromConnectionFactory(redisConnectionFactory())
+        .withCacheConfiguration(cachePropertiesProvider.getCacheName(),
+            RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofMinutes(5))
+                .serializeValuesWith(SerializationPair.fromSerializer(
+                    new GenericJackson2JsonRedisSerializer(redisObjectMapper()))));
+  }
+
+  @Profile(value = "prod")
+  @Bean
+  public LettuceConnectionFactory redisConnectionFactory() {
+    RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration(
+        cachePropertiesProvider.getHost(), cachePropertiesProvider.getPort());
+    redisConfig.setPassword(RedisPassword.of(cachePropertiesProvider.getPassword()));
+
+    return new LettuceConnectionFactory(redisConfig);
   }
 
   @Bean

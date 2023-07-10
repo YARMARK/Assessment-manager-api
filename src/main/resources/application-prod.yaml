@@ -19,6 +19,13 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  redis:
+    port: ${vcap.services.cache_db.credentials.port}
+    host: ${vcap.services.cache_db.credentials.hostname}
+    password: ${vcap.services.cache_db.credentials.password}
+  cache:
+    type: redis
+    cache-names: employees
 server:
   error:
     include-message: always

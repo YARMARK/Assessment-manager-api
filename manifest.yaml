@@ -3,8 +3,9 @@ applications:
     memory: 768M
     random-route: true
     path: target/Assessment-manager-api-0.0.1-SNAPSHOT.jar
-    service:
+    services:
       - my_db_manager
+      - cache_db
     env:
       SPRING_PROFILES_ACTIVE: prod
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ }}'
