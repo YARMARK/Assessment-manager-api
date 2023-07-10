@@ -20,10 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +37,11 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   private EmployeeInfoRepository repository;
 
   private EmployeeInfoMapper mappingUtil;
+
+  public static Logger logger = LoggerFactory.getLogger(EmployeeInfoServiceImpl.class);
+
+  @Value("${spring.cache.cache-names}")
+  private String cacheName;
 
   @Autowired
   public EmployeeInfoServiceImpl(EmployeeInfoRepository repository,
@@ -60,9 +67,10 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   }
 
   @Override
-  @Cacheable(value = "employees", key = "#page")
+  @Cacheable(value = "#{${cache.cache-names}}", key = "#page")
   public Map<String, Object> getAllEmployeesPage(int page, int size) {
-    Pageable pageable = PageRequest.of(page,size);
+    logger.info("Response isn't from Cache!!!!!!!!!!!!!!");
+    Pageable pageable = PageRequest.of(page, size);
     List<EmployeeInfoDto> targetData = new ArrayList<>();
     Map<String, Object> result = new HashMap<>();
     Page<EmployeeInfo> employeePage = repository.findAll(pageable);
@@ -92,7 +100,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 
 
   @Override
-  @CacheEvict(value = "employees")
+  @CacheEvict(value = "#{${cache.cache-names}}", allEntries = true)
   public List<EmployeeInfoDto> saveAllEmployeesInfo(List<EmployeeInfoCreationDto> input) {
     List<EmployeeInfoDto> employeeInfoDtoList = new ArrayList<>();
     for (EmployeeInfoCreationDto employeeInfo : input) {
@@ -128,7 +136,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
     Optional<EmployeeInfo> byId = repository.findById(id);
     if (byId.isPresent()) {
       EmployeeInfo employeeInfo = changeAssessmentFlag(byId.get());
-      employeeInfo = setFolderUrl(employeeInfo,folderId);
+      employeeInfo = setFolderUrl(employeeInfo, folderId);
       EmployeeInfo savedEmployee = repository.save(employeeInfo);
       return mappingUtil.mapToDto(savedEmployee);
     }
@@ -177,9 +185,9 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
     Optional<EmployeeInfo> byId = repository.findById(id);
     if (byId.isPresent()) {
       EmployeeInfo employeeInfo = byId.get();
-      String folderName  = employeeInfo.getFirstName() + "_" +employeeInfo.getLastName();
+      String folderName = employeeInfo.getFirstName() + "_" + employeeInfo.getLastName();
       return folderName;
-    }else {
+    } else {
       throw new EmployeeNotFoundException(id.toString());
     }
   }

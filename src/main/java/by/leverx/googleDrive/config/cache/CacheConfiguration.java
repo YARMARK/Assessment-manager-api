@@ -1,12 +1,13 @@
-package by.leverx.googleDrive.config;
+package by.leverx.googleDrive.config.cache;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.time.Duration;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
@@ -14,13 +15,18 @@ import org.springframework.data.redis.serializer.RedisSerializationContext.Seria
 @Configuration
 public class CacheConfiguration {
 
-  @Value("${spring.cache.cache-names}")
-  private String cacheName;
+  private CachePropertiesProvider cachePropertiesProvider;
 
+  @Autowired
+  public CacheConfiguration(CachePropertiesProvider cachePropertiesProvider) {
+    this.cachePropertiesProvider = cachePropertiesProvider;
+  }
+
+  @Profile(value = "dev")
   @Bean
-  public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
+  public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizerDev() {
     return (builder) -> builder
-        .withCacheConfiguration(cacheName,
+        .withCacheConfiguration(cachePropertiesProvider.getCacheName(),
             RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofMinutes(5))
                 .serializeValuesWith(SerializationPair.fromSerializer(

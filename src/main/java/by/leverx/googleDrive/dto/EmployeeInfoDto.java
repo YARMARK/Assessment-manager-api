@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 import java.time.LocalDate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel(value = "EmployeeCreation",
     description = "model represents employee info from database.")
-public class EmployeeInfoDto {
+public class EmployeeInfoDto implements Serializable {
 
   @ApiModelProperty(value = "Fist Name", name = "firstName", dataType = "String", example = "Alex")
   private String firstName;
